@@ -16,6 +16,25 @@ public class Entity implements Serializable {
     private float radius;
     private float[] colour;
     private Map<Class, EntityPart> parts;
+    
+    private String sprite;
+    private boolean IsLoaded;
+
+    public String getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
+    public boolean getIsLoaded() {
+        return IsLoaded;
+    }
+
+    public void setIsLoaded(boolean IsLoaded) {
+        this.IsLoaded = IsLoaded;
+    }
 
     public Entity() {
         parts = new ConcurrentHashMap<>();

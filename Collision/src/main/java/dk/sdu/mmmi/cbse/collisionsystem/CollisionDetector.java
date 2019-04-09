@@ -23,7 +23,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 if (e.getID().equals(f.getID())) {
                     continue;
                 }
-
+                   
                 if (circleCollision(e, f)) {
                     // avoid bullets damaging the entity that created said bullet
                     if (e.getPart(ProjectilePart.class) != null) {

@@ -1,4 +1,26 @@
 -------------------------------------------------------------------------------
 Test set: dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolverTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.038 sec - in dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolverTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.893 sec <<< FAILURE! - in dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolverTest
+testJarAssetManager(dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolverTest)  Time elapsed: 0.169 sec  <<< ERROR!
+com.badlogic.gdx.utils.GdxRuntimeException: com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load dependencies of asset: /Users/casperhasnsen/Documents/SDU/4thsemester/SemesterProject/ComponentGame/Core/target/Core-1.0-SNAPSHOT.jar!/assets/images/Ship.png
+	at com.badlogic.gdx.utils.async.AsyncResult.get(AsyncResult.java:46)
+	at com.badlogic.gdx.assets.AssetLoadingTask.handleAsyncLoader(AssetLoadingTask.java:117)
+	at com.badlogic.gdx.assets.AssetLoadingTask.update(AssetLoadingTask.java:89)
+	at com.badlogic.gdx.assets.AssetManager.updateTask(AssetManager.java:464)
+	at com.badlogic.gdx.assets.AssetManager.update(AssetManager.java:352)
+	at com.badlogic.gdx.assets.AssetManager.finishLoading(AssetManager.java:375)
+	at dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolverTest.testJarAssetManager(AssetsJarFileResolverTest.java:56)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 1
+	at dk.sdu.mmmi.cbse.core.managers.JarFileHandleStream.<init>(JarFileHandleStream.java:29)
+	at dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver.resolve(AssetsJarFileResolver.java:17)
+	at com.badlogic.gdx.assets.loaders.AssetLoader.resolve(AssetLoader.java:42)
+	at com.badlogic.gdx.assets.AssetLoadingTask.resolve(AssetLoadingTask.java:146)
+	at com.badlogic.gdx.assets.AssetLoadingTask.call(AssetLoadingTask.java:64)
+	at com.badlogic.gdx.assets.AssetLoadingTask.call(AssetLoadingTask.java:34)
+	at com.badlogic.gdx.utils.async.AsyncExecutor$2.call(AsyncExecutor.java:58)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+

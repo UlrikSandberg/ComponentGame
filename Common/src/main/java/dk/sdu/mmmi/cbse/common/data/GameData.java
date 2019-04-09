@@ -12,6 +12,10 @@ public class GameData {
     private int displayHeight;
     private final GameKeys keys = new GameKeys();
     private List<Event> events = new CopyOnWriteArrayList<>();
+    private float playerPositionY;
+    private float playerPositionX;
+    private float playerSpeed;
+    private float radians;
 
     public void addEvent(Event e) {
         events.add(e);
@@ -62,5 +66,37 @@ public class GameData {
         }
 
         return r;
+    }
+    
+    public float getPlayerPositionX() {
+        return this.playerPositionX;
+    }
+    
+    public float getPlayerPositionY() {
+        return this.playerPositionY;
+    }
+    
+    public void setPlayerPositionX(float playerPositionX) {
+        this.playerPositionX = playerPositionX;
+    }
+    
+    public void setPlayerPositionY(float playerPositionY) {
+        this.playerPositionY = playerPositionY;
+    }
+    
+    public void setSpeed (float speed) {
+        this.playerSpeed = speed;
+    }
+    
+    public float getSpeed () {
+        return this.playerSpeed;
+    }
+    
+    public float getRadians() {
+        return this.radians;
+    }
+    
+    public void setRadians(float radians) {
+        this.radians = radians;
     }
 }

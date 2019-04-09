@@ -15,6 +15,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import java.io.File;
 import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -29,9 +30,15 @@ public class AsteroidPlugin implements IGamePluginService {
 
     private Entity asteroid;
 
+    String jarUrl;
+     
+    
     @Override
     public void start(GameData gameData, World world) {
+        
         asteroid = createLargeAsteroid(gameData);
+        jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
+        asteroid.setSprite(jarUrl);
         world.addEntity(asteroid);
     }
 
@@ -47,7 +54,7 @@ public class AsteroidPlugin implements IGamePluginService {
         float radians = 3.1415f / 2 + (float) Math.random();
         float x = gameData.getDisplayWidth() / 2 + 100;
         float y = gameData.getDisplayHeight() / 2 + 50;
-
+        
         float[] colour = new float[4];
         colour[0] = 1.0f;
         colour[1] = 1.0f;
@@ -62,6 +69,7 @@ public class AsteroidPlugin implements IGamePluginService {
         UUID uuid = UUID.randomUUID();
         asteroidLarge.add(new SplitterPart(uuid.toString()));
         asteroidLarge.setRadius(15);
+        asteroidLarge.setSprite(jarUrl);
 
         return (Asteroid) asteroidLarge;
     }

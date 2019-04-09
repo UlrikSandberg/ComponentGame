@@ -37,6 +37,7 @@ public class BulletControlSystem implements IEntityProcessingService {
                     //Add entity radius to initial position to avoid immideate collision.
                     bullet = createBullet(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), positionPart.getRadians(), shootingPart.getID());
                     shootingPart.setIsShooting(false);
+                    
                     world.addEntity(bullet);
                 }
             }

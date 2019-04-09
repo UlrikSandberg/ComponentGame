@@ -16,15 +16,18 @@ public class JarFileHandleStream extends FileHandleStream {
 
     private JarFile jarFile = null;
     private String jarRelResDir;
+    private String[] pathString;
 
     public JarFileHandleStream(String path) {
         super(path);
         try {
             String[] args = path.split("!");
+            pathString = args[0].split("/application");
             jarRelResDir = args[1].substring(1);
 
             String jarFilePath = args[0];
-            jarFile = new JarFile(jarFilePath);
+            String test = pathString[0] + pathString[1];
+            jarFile = new JarFile(test);
         } catch (IOException ex) {
             Logger.getLogger(JarFileHandleStream.class.getName()).log(Level.SEVERE, null, ex);
         }

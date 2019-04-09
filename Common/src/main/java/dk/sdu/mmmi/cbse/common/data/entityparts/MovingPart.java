@@ -73,6 +73,10 @@ public class MovingPart
     public void setUp(boolean up) {
         this.up = up;
     }
+    
+    public float getSpeed() {
+        return this.maxSpeed;
+    }
 
     @Override
     public void process(GameData gameData, Entity entity) {

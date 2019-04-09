@@ -39,7 +39,7 @@ public class AssetsJarFileResolverTest {
      * Test of resolve method, of class AssetsJarFileResolver.
      * @throws java.net.MalformedURLException
      */
-    @Ignore
+
     @Test
     public void testJarAssetManager() throws MalformedURLException {
 
@@ -55,6 +55,7 @@ public class AssetsJarFileResolverTest {
         am.load(jarUrl, Texture.class);
         am.finishLoading();
         Texture result = am.get(jarUrl, Texture.class);
+        System.out.println(result);
 
         // ASSERTS
         assertNotNull(result.getTextureData());

@@ -8,6 +8,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.enemy.Enemy;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import java.io.File;
 import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -23,6 +24,7 @@ public class EnemyPlugin implements IGamePluginService {
 
         // Add entities to the world
         enemy = createEnemyShip(gameData);
+        enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/test1.png");
         world.addEntity(enemy);
     }
 

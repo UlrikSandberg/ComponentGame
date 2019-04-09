@@ -12,6 +12,8 @@ public class AssetsJarFileResolver implements FileHandleResolver {
     @Override
     public FileHandle resolve(String fileName) {
 
+        
+        
         return new JarFileHandleStream(fileName);
     }
 

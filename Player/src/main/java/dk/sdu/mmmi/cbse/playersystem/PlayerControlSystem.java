@@ -30,18 +30,28 @@ public class PlayerControlSystem implements IEntityProcessingService {
             movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
 
             shootingPart.setIsShooting(gameData.getKeys().isDown(GameKeys.SPACE));
-
+            
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
             shootingPart.process(gameData, player);
             lifePart.process(gameData, player);
+            gameData.setSpeed(movingPart.getSpeed());
 
-            updateShape(player);
+            gameData.setRadians(positionPart.getRadians());
+            gameData.setPlayerPositionX(positionPart.getX());
+            gameData.setPlayerPositionY(positionPart.getY());
+            
+           // updateShape(player);
+            
 
         }
+        
+        
     }
 
     private void updateShape(Entity entity) {
+       
+        /*
         float[] shapex = new float[4];
         float[] shapey = new float[4];
         PositionPart positionPart = entity.getPart(PositionPart.class);
@@ -63,6 +73,12 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
+
+*/
+        
+        
+        
+        
     }
 
 }
