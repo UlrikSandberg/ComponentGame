@@ -2,6 +2,7 @@ package dk.sdu.mmmi.cbse.common.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,6 +15,24 @@ public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
 
+    private final Map<String, NonEntity> background = new HashMap<>();
+    
+    public String addNonEntity(NonEntity nEntity)
+    {
+        background.put(nEntity.getId(), nEntity);
+        return nEntity.getId();
+    }
+    
+    public void removeNonEntity(String id)
+    {
+        background.remove(id);
+    }
+    
+    public void removeNonEntity(NonEntity entity)
+    {
+        background.remove(entity.getId());
+    }
+    
     public String addEntity(Entity entity) {
         entityMap.put(entity.getID(), entity);
         return entity.getID();
@@ -29,6 +48,11 @@ public class World {
 
     public Collection<Entity> getEntities() {
         return entityMap.values();
+    }
+    
+    public Collection<NonEntity> getNonEntities()
+    {
+        return background.values();
     }
 
     public <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes) {

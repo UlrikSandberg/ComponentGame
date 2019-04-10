@@ -34,8 +34,5 @@ public class CameraManager {
         } else {
             cam.position.y = gameData.getPlayerPositionY();
         }
-        
-        
     }
-    
 }

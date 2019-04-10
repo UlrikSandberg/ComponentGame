@@ -101,7 +101,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 System.out.println("OPPE");
             } 
             
-            System.out.println("X :  " + positionPart.getX() + "   y:    "  + positionPart.getY());
+            //System.out.println("X :  " + positionPart.getX() + "   y:    "  + positionPart.getY());
             
             gameData.setPlayerPositionY(positionPart.getY());
             gameData.setPlayerPositionX(positionPart.getX());

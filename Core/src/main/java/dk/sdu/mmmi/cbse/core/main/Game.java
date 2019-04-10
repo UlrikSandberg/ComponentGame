@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.NonEntity;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
@@ -57,8 +58,8 @@ public class Game implements ApplicationListener {
     private CameraManager cameraManager;
 
    
-    private static final int GAME_HEIGHT = 6400;
-    private static final int GAME_WIDTH = 8000;
+    private static final int GAME_HEIGHT = 2900;
+    private static final int GAME_WIDTH = 4400;
     
     
     @Override
@@ -105,10 +106,7 @@ public class Game implements ApplicationListener {
             gamePlugins.add(plugin);
             
         }
-       
-           
         LoadAssets();
-       
     }
 
     @Override
@@ -131,6 +129,7 @@ public class Game implements ApplicationListener {
 
         batch.begin();
         //batch.setProjectionMatrix(cam.combined);
+        DrawNonEntities();
         draw();
         batch.end();
     }
@@ -175,7 +174,31 @@ public class Game implements ApplicationListener {
 
         }
     }
-           
+       
+
+    public void DrawNonEntities()
+    {
+        for(NonEntity entity : world.getNonEntities())
+        {
+            if(!entity.isIsDrawn())
+            {
+                //Draw entities
+                if(entity.getSprite() != null)
+                {
+                    Sprite sprite = new Sprite(assetManager.get(entity.getSprite(), Texture.class));
+                    sprite.setSize(entity.getWidth(), entity.getHeight());
+                    
+                    sprite.setOriginCenter();
+                    
+                    sprite.flip(false, false);
+                    sprite.rotate90(true);
+                    sprite.setY(entity.getPositionY());
+                    sprite.setX(entity.getPositionX());
+                    sprite.draw(batch);
+                }
+            }
+        }
+    }
     
     private void LoadAssets()
     {
@@ -191,6 +214,17 @@ public class Game implements ApplicationListener {
           
             }
         } 
+        for(NonEntity entity : world.getNonEntities())
+        {
+            if(entity.getSprite() != null)
+            {
+                assetManager.load(entity.getSprite(), Texture.class);
+                
+                assetManager.finishLoading();
+                
+                entity.setIsLoaded(true);
+            }
+        }
     }
     
      
@@ -203,6 +237,14 @@ public class Game implements ApplicationListener {
                 assetManager.unload(entity.getSprite());
                 entity.setIsLoaded(false);
             }
+        }
+        for(NonEntity entity : world.getNonEntities())
+        {
+           if(entity.getSprite() != null && entity.isIsLoaded())
+           {
+               assetManager.unload(entity.getSprite());
+               entity.setIsLoaded(false);
+           }
         }
     }
         
