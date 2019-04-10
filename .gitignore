@@ -4,3 +4,4 @@ Core/target
 .DS_Store
 /branding/target/
 Asteroid/target
+Bullet/target
