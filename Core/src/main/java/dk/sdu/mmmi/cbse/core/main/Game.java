@@ -5,6 +5,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,7 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver;
+import dk.sdu.mmmi.cbse.core.managers.CameraManager;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
@@ -51,18 +53,27 @@ public class Game implements ApplicationListener {
     private Sprite Astsprite;
     
     private AssetManager assetManager;
+    
+    private CameraManager cameraManager;
 
+   
+    private static final int GAME_HEIGHT = 6400;
+    private static final int GAME_WIDTH = 8000;
+    
+    
     @Override
     public void create() {
-        gameData.setDisplayWidth(Gdx.graphics.getWidth());
-        gameData.setDisplayHeight(Gdx.graphics.getHeight());
+        gameData.setDisplayWidth(GAME_WIDTH);
+        gameData.setDisplayHeight(GAME_HEIGHT);
         
         
-        cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
+        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //cam.translate(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        cam.setToOrtho(false , 800 , 600);
- 
+        //cam.setToOrtho(false , GAME_WIDTH , GAME_HEIGHT);
+        cameraManager = new CameraManager();
+        
         batch = new SpriteBatch();
+        
         
         cam.update();
 
@@ -73,15 +84,12 @@ public class Game implements ApplicationListener {
         AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
         assetManager = new AssetManager(jfhr);
         
-        Texture backgroundTexture = new Texture("/Users/casperhasnsen/ship.png");
-        Texture comet = new Texture("/Users/casperhasnsen/comet.png");
         
-        Astsprite = new Sprite(comet);
+       
         batch.begin();
         //sprite.setCenter(gameData.getPlayerPositionX(), gameData.getPlayerPositionY());
        
-        Astsprite.setSize(50, 50);
-        
+
         batch.end();
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
 
@@ -98,7 +106,6 @@ public class Game implements ApplicationListener {
             
         }
        
-           batch.setProjectionMatrix(cam.combined);
            
         LoadAssets();
        
@@ -113,16 +120,17 @@ public class Game implements ApplicationListener {
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
 
-        cam.position.x = gameData.getPlayerPositionX();
-       cam.position.y = gameData.getPlayerPositionY();
         
+      
         cam.update();
+         batch.setProjectionMatrix(cam.combined);
+   
+        cameraManager.EdgeMovement(cam, gameData);
         
         update();
-      
-     
-         
+
         batch.begin();
+        //batch.setProjectionMatrix(cam.combined);
         draw();
         batch.end();
     }
@@ -147,13 +155,14 @@ public class Game implements ApplicationListener {
                 PositionPart part = entity.getPart(PositionPart.class);
                 Sprite sprite = new Sprite(assetManager.get(entity.getSprite(), Texture.class) );
                 
-                sprite.setSize(100, 100);
+                sprite.setSize(40, 40);
                
         // sprite.setOrigin(x, y); 
-        sprite.setOriginCenter();
+               sprite.setOriginCenter();
        // sprite.setCenterX(x);
         //sprite.setCenterY(y);
        
+        
         
         sprite.flip(false, false);
         sprite.rotate90(true);

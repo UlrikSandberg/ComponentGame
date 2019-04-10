@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
+import com.sun.javafx.PlatformUtil;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
@@ -31,6 +32,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
             shootingPart.setIsShooting(gameData.getKeys().isDown(GameKeys.SPACE));
             
+            
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
             shootingPart.process(gameData, player);
@@ -38,8 +40,71 @@ public class PlayerControlSystem implements IEntityProcessingService {
             gameData.setSpeed(movingPart.getSpeed());
 
             gameData.setRadians(positionPart.getRadians());
-            gameData.setPlayerPositionX(positionPart.getX());
+            
+            
+            
+            
+            
+            
+           
+            
+            if ((positionPart.getX() <= gameData.getDisplayWidth() - gameData.getDisplayWidth() +10) && (positionPart.getY() >= gameData.getDisplayHeight() -100 )) {
+                positionPart.setY(gameData.getDisplayHeight()-100);
+                movingPart.setAcceleration(1000);
+                positionPart.setX((10));
+                System.out.println("Venstre og oppe");
+            }
+            
+            if ((positionPart.getX() <= gameData.getDisplayWidth() - gameData.getDisplayWidth() +10) && (positionPart.getY() <= gameData.getDisplayHeight() - gameData.getDisplayHeight() +10)) {
+                positionPart.setY(10);
+                movingPart.setAcceleration(1000);
+                positionPart.setX((10));
+                System.out.println(" Venstre og nede");
+            }
+            
+            if ((positionPart.getX() >= gameData.getDisplayWidth() -100) && (positionPart.getY() <= gameData.getDisplayHeight() - gameData.getDisplayHeight() +10)) {
+                positionPart.setY(10);
+                movingPart.setAcceleration(1000);
+                positionPart.setX(gameData.getDisplayWidth()-100);
+                System.out.println("Højre og nede");
+            }
+            
+            if ((positionPart.getX() >= gameData.getDisplayWidth() -100) && (positionPart.getY() >= gameData.getDisplayHeight() -100 )) {
+                positionPart.setX(gameData.getDisplayWidth()-100);
+                movingPart.setAcceleration(1000);
+                positionPart.setY(gameData.getDisplayHeight()-100);
+                System.out.println("Højre og oppe");
+            }
+            
+            if (positionPart.getX() <= gameData.getDisplayWidth() - gameData.getDisplayWidth() +10)  {
+
+                positionPart.setX((10));
+                movingPart.setAcceleration(500);
+                System.out.println("VENSTRE");
+            } 
+            
+            if (positionPart.getX() >= gameData.getDisplayWidth() -10) {
+                
+                positionPart.setX(gameData.getDisplayWidth()-10);
+                movingPart.setAcceleration(500);
+                System.out.println("HØJRE");
+                
+            }
+            if (positionPart.getY() <= gameData.getDisplayHeight() - gameData.getDisplayHeight() +10) {
+                positionPart.setY(10);
+                movingPart.setAcceleration(1000);
+                System.out.println("NEDE");
+            }
+            if (positionPart.getY() >= gameData.getDisplayHeight() - 50) {
+                positionPart.setY(gameData.getDisplayHeight()-50);
+                movingPart.setAcceleration(1000);
+                System.out.println("OPPE");
+            } 
+            
+            System.out.println("X :  " + positionPart.getX() + "   y:    "  + positionPart.getY());
+            
             gameData.setPlayerPositionY(positionPart.getY());
+            gameData.setPlayerPositionX(positionPart.getX());
             
            // updateShape(player);
             
