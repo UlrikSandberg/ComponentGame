@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.Asteroid">
-    <module_version install_time="1554818434727" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1554885986253" last="true" origin="installer" specification_version="1.0">
         <file crc="2165993940" name="config/Modules/dk-sdu-mmmi-cbse-Asteroid.xml"/>
-        <file crc="3495504579" name="modules/dk-sdu-mmmi-cbse-Asteroid.jar"/>
+        <file crc="4221544851" name="modules/dk-sdu-mmmi-cbse-Asteroid.jar"/>
     </module_version>
 </module>
