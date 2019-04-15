@@ -42,12 +42,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
             gameData.setRadians(positionPart.getRadians());
             
             
-            
-            
-            
-            
-           
-            
             if ((positionPart.getX() <= gameData.getDisplayWidth() - gameData.getDisplayWidth() +10) && (positionPart.getY() >= gameData.getDisplayHeight() -100 )) {
                 positionPart.setY(gameData.getDisplayHeight()-100);
                 movingPart.setAcceleration(1000);

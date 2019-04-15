@@ -5,6 +5,8 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,6 +31,7 @@ import dk.sdu.mmmi.cbse.core.managers.CameraManager;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -52,14 +55,15 @@ public class Game implements ApplicationListener {
     private Graphics2D g2d;
     private Sprite sprite;
     private Sprite Astsprite;
+    private Music music;
     
     private AssetManager assetManager;
     
     private CameraManager cameraManager;
 
    
-    private static final int GAME_HEIGHT = 2900;
-    private static final int GAME_WIDTH = 4400;
+    private static final int GAME_HEIGHT = 5000;
+    private static final int GAME_WIDTH = 8000;
     
     
     @Override
@@ -85,8 +89,6 @@ public class Game implements ApplicationListener {
         AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
         assetManager = new AssetManager(jfhr);
         
-        
-       
         batch.begin();
         //sprite.setCenter(gameData.getPlayerPositionX(), gameData.getPlayerPositionY());
        
@@ -106,6 +108,11 @@ public class Game implements ApplicationListener {
             gamePlugins.add(plugin);
             
         }
+        assetManager.load(new File("").getAbsolutePath() + "/Core/target/Core-1.0-SNAPSHOT.jar!/assets/images/SpaceSounds.mp3", Music.class);
+        assetManager.finishLoading();
+        music = assetManager.get(new File("").getAbsolutePath() + "/Core/target/Core-1.0-SNAPSHOT.jar!/assets/images/SpaceSounds.mp3", Music.class);
+        music.setLooping(true);
+        music.play();
         LoadAssets();
     }
 
@@ -160,7 +167,16 @@ public class Game implements ApplicationListener {
                sprite.setOriginCenter();
        // sprite.setCenterX(x);
         //sprite.setCenterY(y);
-       
+                //Make spawn sound
+                if(!entity.isIsSpawned())
+                {
+                    entity.setIsSpawned(true);
+                    if(entity.getSpawnSound() != null)
+                    {
+                       Sound s = assetManager.get(entity.getSpawnSound(), Sound.class);
+                       s.play();
+                    }
+                }
         
         
         sprite.flip(false, false);
@@ -211,7 +227,14 @@ public class Game implements ApplicationListener {
                 assetManager.finishLoading();
 
                 entity.setIsLoaded(true);
-          
+            }
+            if(entity.getSpawnSound() != null)
+            {
+                assetManager.load(entity.getSpawnSound(), Sound.class);
+                
+                assetManager.finishLoading();
+                
+                entity.setIsSpawnSoundLoaded(true);
             }
         } 
         for(NonEntity entity : world.getNonEntities())
@@ -237,6 +260,11 @@ public class Game implements ApplicationListener {
                 assetManager.unload(entity.getSprite());
                 entity.setIsLoaded(false);
             }
+            if(entity.getSpawnSound() != null && entity.isIsSpawnSoundLoaded())
+            {
+                assetManager.unload(entity.getSpawnSound());
+                entity.setIsSpawnSoundLoaded(false);
+            }
         }
         for(NonEntity entity : world.getNonEntities())
         {
@@ -247,8 +275,6 @@ public class Game implements ApplicationListener {
            }
         }
     }
-        
-        
     
 
     @Override

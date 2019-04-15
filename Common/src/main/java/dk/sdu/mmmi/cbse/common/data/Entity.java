@@ -18,7 +18,37 @@ public class Entity implements Serializable {
     private Map<Class, EntityPart> parts;
     
     private String sprite;
+    private String spawnSound;
+    private boolean isSpawnSoundLoaded;
+    
     private boolean IsLoaded;
+    
+    
+    private boolean isSpawned;
+
+    public boolean isIsSpawnSoundLoaded() {
+        return isSpawnSoundLoaded;
+    }
+
+    public void setIsSpawnSoundLoaded(boolean isSpawnSoundLoaded) {
+        this.isSpawnSoundLoaded = isSpawnSoundLoaded;
+    }
+
+    public boolean isIsSpawned() {
+        return isSpawned;
+    }
+
+    public void setIsSpawned(boolean isSpawned) {
+        this.isSpawned = isSpawned;
+    }
+
+    public String getSpawnSound() {
+        return spawnSound;
+    }
+
+    public void setSpawnSound(String spawnSound) {
+        this.spawnSound = spawnSound;
+    }
 
     public String getSprite() {
         return sprite;
