@@ -117,10 +117,8 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Asteroid</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
+            <artifactId>Missile</artifactId>            <version>${project.version}</version>
+        </dependency>        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>AsteroidSplitter</artifactId>
             <version>${project.version}</version>
