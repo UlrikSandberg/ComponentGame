@@ -3,12 +3,15 @@ package dk.sdu.mmmi.cbse.collisionsystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CreatedMetaDataPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -47,6 +50,22 @@ public class CollisionDetector implements IPostEntityProcessingService {
                     }
                     // in case it's an asteroid, let it split
                     if (f.getPart(SplitterPart.class) != null) {
+                        
+                        //Check if the entity has recently been created
+                        CreatedMetaDataPart metaData = f.getPart(CreatedMetaDataPart.class);
+                        
+                        if(metaData != null) //Check that we are not checking collisions for just created entities
+                        {
+                            LocalDateTime now = LocalDateTime.now();
+                            
+                            long millis = ChronoUnit.MILLIS.between(metaData.getDate(), now);
+                            
+                            if(millis < 500)
+                            {
+                                continue;
+                            }
+                        }
+                        
                         SplitterPart fsp = f.getPart(SplitterPart.class);
 
                         // in case an asteroid collides with its children

@@ -57,7 +57,7 @@ public class BulletControlSystem implements IEntityProcessingService {
             LifePart lpb = b.getPart(LifePart.class);
             //If duration is exceeded, remove the bullet.
             if (btp.getExpiration() < 0) {
-                world.removeEntity(bullet);
+                world.removeEntity(b);
             }
 
             ppb.process(gameData, b);
@@ -91,6 +91,4 @@ public class BulletControlSystem implements IEntityProcessingService {
 
         return b;
     }
-
-    
 }

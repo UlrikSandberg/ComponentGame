@@ -6,16 +6,17 @@
 package dk.sdu.mmmi.cbse.asteroid;
 
 import dk.sdu.mmmi.cbse.common.asteroids.Asteroid;
-import static dk.sdu.mmmi.cbse.common.asteroids.AsteroidType.LARGE;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CreatedMetaDataPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -31,12 +32,11 @@ public class AsteroidPlugin implements IGamePluginService {
     private Entity asteroid;
 
     String jarUrl;
-     
     
     @Override
     public void start(GameData gameData, World world) {
         
-        asteroid = createLargeAsteroid(gameData);
+        asteroid = createAsteroid(gameData);
         jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
         asteroid.setSprite(jarUrl);
         world.addEntity(asteroid);
@@ -49,7 +49,7 @@ public class AsteroidPlugin implements IGamePluginService {
         }
     }
 
-    private Asteroid createLargeAsteroid(GameData gameData) {
+    private Asteroid createAsteroid(GameData gameData) {
         float speed = (float) Math.random() * 10f + 40f;
         float radians = 3.1415f / 2 + (float) Math.random();
         float x = gameData.getDisplayWidth() / 2 + 100;
@@ -61,17 +61,18 @@ public class AsteroidPlugin implements IGamePluginService {
         colour[2] = 1.0f;
         colour[3] = 1.0f;
 
-        Entity asteroidLarge = new Asteroid(LARGE);
-        asteroidLarge.add(new MovingPart(0, speed, speed, 0));
-        asteroidLarge.add(new PositionPart(x, y, radians));
-        asteroidLarge.add(new LifePart(1));
-        asteroidLarge.setColour(colour);
+        Entity asteroid = new Asteroid();
+        asteroid.add(new MovingPart(0, speed, speed, 0));
+        asteroid.add(new PositionPart(x, y, radians));
+        asteroid.add(new LifePart(3));
+        asteroid.add(new SplitterPart(asteroid.getID()));
+        asteroid.add(new CreatedMetaDataPart(LocalDateTime.now()));
+        asteroid.setColour(colour);
         UUID uuid = UUID.randomUUID();
-        asteroidLarge.add(new SplitterPart(uuid.toString()));
-        asteroidLarge.setRadius(15);
-        asteroidLarge.setSprite(jarUrl);
+        asteroid.add(new SplitterPart(uuid.toString()));
+        asteroid.setRadius(15);
+        asteroid.setSprite(jarUrl);
 
-        return (Asteroid) asteroidLarge;
+        return (Asteroid) asteroid;
     }
-
 }

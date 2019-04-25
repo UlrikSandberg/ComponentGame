@@ -76,6 +76,7 @@
         <module>Enemy</module>
         <module>Collision</module>
         <module>Background</module>
+        <module>AsteroidSplitter</module>
     </modules>
 
     <properties>

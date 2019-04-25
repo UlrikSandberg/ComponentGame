@@ -128,7 +128,7 @@ public class Game implements ApplicationListener {
         
       
         cam.update();
-         batch.setProjectionMatrix(cam.combined);
+        batch.setProjectionMatrix(cam.combined);
    
         cameraManager.EdgeMovement(cam, gameData);
         
@@ -163,31 +163,28 @@ public class Game implements ApplicationListener {
                 
                 sprite.setSize(40, 40);
                
-        // sprite.setOrigin(x, y); 
-               sprite.setOriginCenter();
-       // sprite.setCenterX(x);
-        //sprite.setCenterY(y);
+                sprite.setOriginCenter();
                 //Make spawn sound
                 if(!entity.isIsSpawned())
                 {
                     entity.setIsSpawned(true);
                     if(entity.getSpawnSound() != null)
                     {
-                       Sound s = assetManager.get(entity.getSpawnSound(), Sound.class);
-                       s.play();
+                        if(assetManager.isLoaded(entity.getSpawnSound()))
+                        {
+                            Sound s = assetManager.get(entity.getSpawnSound(), Sound.class);
+                            s.play();
+                        }
                     }
                 }
         
-        
-        sprite.flip(false, false);
-        sprite.rotate90(true);
-        sprite.setY(part.getY());
-        sprite.setX(part.getX());
-        sprite.setRotation(part.getRadians() * MathUtils.radiansToDegrees);
-        sprite.draw(batch);
-                
+                sprite.flip(false, false);
+                sprite.rotate90(true);
+                sprite.setY(part.getY());
+                sprite.setX(part.getX());
+                sprite.setRotation(part.getRadians() * MathUtils.radiansToDegrees);
+                sprite.draw(batch);
             }
-
         }
     }
        

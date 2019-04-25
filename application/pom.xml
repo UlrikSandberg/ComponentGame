@@ -77,11 +77,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Asteroid</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -118,6 +113,16 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Background</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Asteroid</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AsteroidSplitter</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
