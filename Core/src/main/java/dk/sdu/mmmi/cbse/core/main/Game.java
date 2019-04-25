@@ -127,7 +127,6 @@ public class Game implements ApplicationListener {
    
         cameraManager.EdgeMovement(cam, gameData);
         
-        
         update();
 
         batch.begin();
@@ -277,21 +276,30 @@ public class Game implements ApplicationListener {
         {
             if(entity.getSprite() != null && entity.getIsLoaded())
             {
-                assetManager.unload(entity.getSprite());
-                entity.setIsLoaded(false);
+                /*if(assetManager.isLoaded(entity.getSprite()))
+                {
+                    assetManager.unload(entity.getSprite());
+                    entity.setIsLoaded(false);
+                }*/
             }
             if(entity.getSpawnSound() != null && entity.isIsSpawnSoundLoaded())
             {
-                assetManager.unload(entity.getSpawnSound());
-                entity.setIsSpawnSoundLoaded(false);
+                /*if(assetManager.isLoaded(entity.getSpawnSound()))
+                {
+                    assetManager.unload(entity.getSpawnSound());
+                    entity.setIsSpawnSoundLoaded(false);
+                }*/
             }
         }
         for(NonEntity entity : world.getNonEntities())
         {
            if(entity.getSprite() != null && entity.isIsLoaded())
            {
-               assetManager.unload(entity.getSprite());
-               entity.setIsLoaded(false);
+               /*if(assetManager.isLoaded(entity.getSprite()))
+               {
+                   assetManager.unload(entity.getSprite());
+                   entity.setIsLoaded(false);
+               }*/
            }
         }
     }
