@@ -44,10 +44,14 @@ public class AsteroidSplitterImplementation implements IAsteroidSplitter {
         
         Entity smallAsteroid1 = new Asteroid();
         Entity smallAsteroid2 = new Asteroid();
+        Entity smallAsteroid3 = new Asteroid();
+        Entity smallAsteroid4 = new Asteroid();
         
         //Set image from e if such exists
         smallAsteroid1.setSprite(e.getSprite());
         smallAsteroid2.setSprite(e.getSprite());
+        smallAsteroid3.setSprite(e.getSprite());
+        smallAsteroid4.setSprite(e.getSprite());
         
         if(baseLife == 2)
         {
@@ -86,6 +90,28 @@ public class AsteroidSplitterImplementation implements IAsteroidSplitter {
         smallAsteroid2.add(new CreatedMetaDataPart(LocalDateTime.now()));
         
         world.addEntity(smallAsteroid2);
+        
+        smallAsteroid3.setRadius(radius);
+        
+        PositionPart astPositionPart3 = new PositionPart(basePositionPart.getX() + -10, basePositionPart.getY() + -10, radians + 0.25f);
+        smallAsteroid3.add(new MovingPart(0, 5000, speed, 0));
+        smallAsteroid3.add(astPositionPart3);
+        smallAsteroid3.add(new LifePart(baseLife));
+        smallAsteroid3.add(new SplitterPart(smallAsteroid3.getID()));
+        smallAsteroid3.add(new CreatedMetaDataPart(LocalDateTime.now()));
+        
+        world.addEntity(smallAsteroid3);
+        
+        smallAsteroid4.setRadius(radius);
+        
+        PositionPart astPositionPart4 = new PositionPart(basePositionPart.getX() + -10, basePositionPart.getY() + -10, radians - 0.25f);
+        smallAsteroid4.add(new MovingPart(0, 5000, speed, 0));
+        smallAsteroid4.add(astPositionPart4);
+        smallAsteroid4.add(new LifePart(baseLife));
+        smallAsteroid4.add(new SplitterPart(smallAsteroid4.getID()));
+        smallAsteroid4.add(new CreatedMetaDataPart(LocalDateTime.now()));
+        
+        world.addEntity(smallAsteroid4);
         
         world.removeEntity(e);
     }

@@ -15,7 +15,10 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -25,21 +28,27 @@ import org.openide.util.lookup.ServiceProviders;
  */
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class),})
-public class MissileControlSystem implements IEntityProcessingService {
+public class MissileControlSystem implements IEntityProcessingService, IWeaponInterface {
     
     private Entity missile;
     
     private String imageurl = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
     private String soundurl = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/MissileSound.mp3";
+    private String weaponimage = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/MissileTurret.jpg";
     
     private boolean isoncooldown = false;
+    private LocalDateTime cooldown = LocalDateTime.now(); 
 
     @Override
     public void process(GameData gameData, World world) {
          for (Entity entity : world.getEntities()) {
             if (entity.getPart(ShootingPart.class) != null) {
-                
-               // while (isoncooldown){
+                            
+                LocalDateTime now = LocalDateTime.now();
+                long millis = ChronoUnit.MILLIS.between(cooldown, now);
+                if (millis < 5000 || gameData.getSelectedWeapon() != 2){
+                    break;
+                }
                 ShootingPart shootingPart = entity.getPart(ShootingPart.class);
                 //Shoot if isShooting is true, ie. space is pressed.
                 if (shootingPart.isShooting()) {
@@ -47,10 +56,9 @@ public class MissileControlSystem implements IEntityProcessingService {
                     //Add entity radius to initial position to avoid immideate collision.
                     missile = createMissile(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), positionPart.getRadians(), shootingPart.getID());
                     shootingPart.setIsShooting(false);
-                    isoncooldown = true;
+                    cooldown = LocalDateTime.now();
                     world.addEntity(missile);
                 }
-               // }
             }
         }
 
@@ -96,6 +104,14 @@ public class MissileControlSystem implements IEntityProcessingService {
         m.setColour(colour);
 
         return m;
+    }
+
+    @Override
+    public void dertimeWeaponState(GameData gameData) {
+         if(gameData.getSelectedWeapon() == 2)
+        {
+            gameData.setSelectedWeaponImage(weaponimage);
+        }
     }
     }
 

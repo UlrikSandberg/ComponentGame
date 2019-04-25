@@ -17,6 +17,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Random;
 import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -30,16 +31,17 @@ import org.openide.util.lookup.ServiceProviders;
 public class AsteroidPlugin implements IGamePluginService {
 
     private Entity asteroid;
-
+    private Random rn = new Random();
     String jarUrl;
     
     @Override
     public void start(GameData gameData, World world) {
-        
+        for (int i =0; i < 25; i++){
         asteroid = createAsteroid(gameData);
-        jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/Asteroid.png";
+        jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
         asteroid.setSprite(jarUrl);
         world.addEntity(asteroid);
+        }
     }
 
     @Override
@@ -63,7 +65,7 @@ public class AsteroidPlugin implements IGamePluginService {
 
         Entity asteroid = new Asteroid();
         asteroid.add(new MovingPart(0, speed, speed, 0));
-        asteroid.add(new PositionPart(x, y, radians));
+        asteroid.add(new PositionPart(rn.nextInt(8000), rn.nextInt(5000), radians));
         asteroid.add(new LifePart(3));
         asteroid.add(new SplitterPart(asteroid.getID()));
         asteroid.add(new CreatedMetaDataPart(LocalDateTime.now()));
