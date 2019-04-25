@@ -14,6 +14,16 @@ public class GameInputProcessor extends InputAdapter {
     }
 
     public boolean keyDown(int k) {
+        
+        if(k == Keys.NUM_1)
+        {
+            gameData.setSelectedWeapon(1);
+        }
+        if(k == Keys.NUM_2)
+        {
+            gameData.setSelectedWeapon(2); 
+        }
+        
         if (k == Keys.UP) {
             gameData.getKeys().setKey(GameKeys.UP, true);
         }

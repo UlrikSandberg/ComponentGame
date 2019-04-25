@@ -37,7 +37,7 @@ public class AsteroidPlugin implements IGamePluginService {
     public void start(GameData gameData, World world) {
         
         asteroid = createAsteroid(gameData);
-        jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
+        jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/Asteroid.png";
         asteroid.setSprite(jarUrl);
         world.addEntity(asteroid);
     }

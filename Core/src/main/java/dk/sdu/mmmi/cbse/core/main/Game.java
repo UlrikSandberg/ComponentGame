@@ -26,6 +26,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
 import dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver;
 import dk.sdu.mmmi.cbse.core.managers.CameraManager;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
@@ -61,7 +62,6 @@ public class Game implements ApplicationListener {
     
     private CameraManager cameraManager;
 
-   
     private static final int GAME_HEIGHT = 5000;
     private static final int GAME_WIDTH = 8000;
     
@@ -92,12 +92,9 @@ public class Game implements ApplicationListener {
         batch.begin();
         //sprite.setCenter(gameData.getPlayerPositionX(), gameData.getPlayerPositionY());
        
-
         batch.end();
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
 
-        
-        
         result = lookup.lookupResult(IGamePluginService.class);
         result.addLookupListener(lookupListener);
         result.allItems();
@@ -125,12 +122,11 @@ public class Game implements ApplicationListener {
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
 
-        
-      
         cam.update();
         batch.setProjectionMatrix(cam.combined);
    
         cameraManager.EdgeMovement(cam, gameData);
+        
         
         update();
 
@@ -138,9 +134,31 @@ public class Game implements ApplicationListener {
         //batch.setProjectionMatrix(cam.combined);
         DrawNonEntities();
         draw();
+        drawToggleWeapon();
         batch.end();
     }
 
+    private void drawToggleWeapon()
+    {
+       if(gameData.getSelectedWeaponImage() != null)
+        {
+            if(!assetManager.isLoaded(gameData.getSelectedWeaponImage()))
+            {
+                assetManager.load(gameData.getSelectedWeaponImage(), Texture.class); 
+                assetManager.finishLoading();
+            }
+            
+            Sprite sprite = new Sprite(assetManager.get(gameData.getSelectedWeaponImage(), Texture.class));
+            sprite.setSize(100, 100); 
+            sprite.setOriginCenter();
+            sprite.setY(cam.position.y - 400);
+            sprite.setX(cam.position.x - 100 + 500);
+            
+            sprite.draw(batch);
+            
+        } 
+    }
+    
     private void update() {
         // Update
         for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
@@ -150,6 +168,11 @@ public class Game implements ApplicationListener {
         // Post Update
         for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
             postEntityProcessorService.process(gameData, world);
+        }
+        
+        for(IWeaponInterface wepFace : getWeaponInterfaces())
+        {
+            wepFace.dertimeWeaponState(gameData);
         }
     }
 
@@ -296,6 +319,10 @@ public class Game implements ApplicationListener {
 
     private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return lookup.lookupAll(IPostEntityProcessingService.class);
+    }
+    
+    private Collection<? extends IWeaponInterface> getWeaponInterfaces() {
+        return lookup.lookupAll(IWeaponInterface.class);
     }
 
     private final LookupListener lookupListener = new LookupListener() {

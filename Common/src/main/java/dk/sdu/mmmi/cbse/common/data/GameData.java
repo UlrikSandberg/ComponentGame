@@ -16,6 +16,32 @@ public class GameData {
     private float playerPositionX;
     private float playerSpeed;
     private float radians;
+    private String selectedWeaponImage;
+    private int selectedWeapon = 1;
+
+    public int getSelectedWeapon() {
+        return selectedWeapon;
+    }
+
+    public void setSelectedWeapon(int selectedWeapon) {
+        this.selectedWeapon = selectedWeapon;
+    }
+
+    public float getPlayerSpeed() {
+        return playerSpeed;
+    }
+
+    public void setPlayerSpeed(float playerSpeed) {
+        this.playerSpeed = playerSpeed;
+    }
+
+    public String getSelectedWeaponImage() {
+        return selectedWeaponImage;
+    }
+
+    public void setSelectedWeaponImage(String selectedImage) {
+        this.selectedWeaponImage = selectedImage;
+    }
 
     public void addEvent(Event e) {
         events.add(e);

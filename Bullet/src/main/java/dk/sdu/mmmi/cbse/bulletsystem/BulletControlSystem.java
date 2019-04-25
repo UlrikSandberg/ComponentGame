@@ -32,6 +32,7 @@ public class BulletControlSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
+        
         for (Entity entity : world.getEntities()) {
             if (entity.getPart(ShootingPart.class) != null) {
 
@@ -40,10 +41,13 @@ public class BulletControlSystem implements IEntityProcessingService {
                 if (shootingPart.isShooting()) {
                     PositionPart positionPart = entity.getPart(PositionPart.class);
                     //Add entity radius to initial position to avoid immideate collision.
-                    bullet = createBullet(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), positionPart.getRadians(), shootingPart.getID());
-                    shootingPart.setIsShooting(false);
+                    if(gameData.getSelectedWeapon() == 1)
+                    {
+                        bullet = createBullet(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), positionPart.getRadians(), shootingPart.getID());
+                        shootingPart.setIsShooting(false);
                     
-                    world.addEntity(bullet);
+                        world.addEntity(bullet);
+                    }
                 }
             }
         }
