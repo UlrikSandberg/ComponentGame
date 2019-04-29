@@ -1,0 +1,43 @@
+-------------------------------------------------------------------------------
+>Log Session: Monday, April 29, 2019 10:16:31 AM CEST
+>System Info: 
+  Product Version         = NetBeans IDE 8.0.2 (Build 201411181905) (#8230772f5f18)
+  Operating System        = Linux version 4.15.0-47-generic running on amd64
+  Java; VM; Vendor        = 1.8.0_201; Java HotSpot(TM) 64-Bit Server VM 25.201-b09; Oracle Corporation
+  Runtime                 = Java(TM) SE Runtime Environment 1.8.0_201-b09
+  Java Home               = /usr/lib/jvm/java-8-oracle/jre
+  System Locale; Encoding = en_US (nb); UTF-8
+  Home Directory          = /home/oskar
+  Current Directory       = /home/oskar/git_repos/ComponentGame/AI
+  User Directory          = /home/oskar/git_repos/ComponentGame/AI/target/userdir
+  Cache Directory         = /home/oskar/git_repos/ComponentGame/AI/target/userdir/var/cache
+  Installation            = /home/oskar/netbeans-8.0.2/nb
+                            /home/oskar/netbeans-8.0.2/ergonomics
+                            /home/oskar/netbeans-8.0.2/ide
+                            /home/oskar/netbeans-8.0.2/extide
+                            /home/oskar/netbeans-8.0.2/java
+                            /home/oskar/netbeans-8.0.2/apisupport
+                            /home/oskar/netbeans-8.0.2/webcommon
+                            /home/oskar/netbeans-8.0.2/websvccommon
+                            /home/oskar/netbeans-8.0.2/enterprise
+                            /home/oskar/netbeans-8.0.2/mobility
+                            /home/oskar/netbeans-8.0.2/profiler
+                            /home/oskar/netbeans-8.0.2/php
+                            /home/oskar/netbeans-8.0.2/harness
+                            /home/oskar/netbeans-8.0.2/cnd
+                            /home/oskar/netbeans-8.0.2/dlight
+                            /home/oskar/netbeans-8.0.2/groovy
+                            /home/oskar/netbeans-8.0.2/javafx
+                            /home/oskar/git_repos/ComponentGame/AI/target/netbeans_clusters/asteroidsnetbeansmodules
+                            /home/oskar/netbeans-8.0.2/platform
+  Boot & Ext. Classpath   = /usr/lib/jvm/java-8-oracle/jre/lib/resources.jar:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar:/usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar:/usr/lib/jvm/java-8-oracle/jre/classes:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunec.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/nashorn.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/dnsns.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/cldrdata.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/jaccess.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/zipfs.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/localedata.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunpkcs11.jar:/usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
+  Application Classpath   = /home/oskar/netbeans-8.0.2/platform/lib/boot.jar:/home/oskar/netbeans-8.0.2/platform/lib/org-openide-modules.jar:/home/oskar/netbeans-8.0.2/platform/lib/org-openide-util.jar:/home/oskar/netbeans-8.0.2/platform/lib/org-openide-util-lookup.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/boot_ja.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/boot_pt_BR.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/boot_ru.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/boot_zh_CN.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-modules_ja.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-modules_pt_BR.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-modules_ru.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-modules_zh_CN.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util_ja.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util-lookup_ja.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util-lookup_pt_BR.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util-lookup_ru.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util-lookup_zh_CN.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util_pt_BR.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util_ru.jar:/home/oskar/netbeans-8.0.2/platform/lib/locale/org-openide-util_zh_CN.jar:/usr/lib/jvm/java-8-oracle/lib/dt.jar:/usr/lib/jvm/java-8-oracle/lib/tools.jar
+  Startup Classpath       = /home/oskar/netbeans-8.0.2/platform/core/core.jar:/home/oskar/netbeans-8.0.2/platform/core/org-openide-filesystems.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/org-openide-filesystems_ru.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/core_zh_CN.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/core_pt_BR.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/org-openide-filesystems_ja.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/core_ja.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/core_ru.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/org-openide-filesystems_pt_BR.jar:/home/oskar/netbeans-8.0.2/platform/core/locale/org-openide-filesystems_zh_CN.jar:/home/oskar/netbeans-8.0.2/nb/core/org-netbeans-upgrader.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/org-netbeans-upgrader_zh_CN.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/core_nb.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/org-netbeans-upgrader_ru.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/core_nb_pt_BR.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/org-netbeans-upgrader_pt_BR.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/core_nb_zh_CN.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/core_nb_ja.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/org-netbeans-upgrader_ja.jar:/home/oskar/netbeans-8.0.2/nb/core/locale/core_nb_ru.jar
+-------------------------------------------------------------------------------
+Warning - could not install some modules:
+	dk.sdu.mmmi.cbse.AI - The module named dk.sdu.mmmi.cbse.Common was needed and not found.
+	dk.sdu.mmmi.cbse.AI - The module org.netbeans.api.annotations.common was requested in version >= 1.27.1 but only 1.24.1 was found.
+	dk.sdu.mmmi.cbse.AI - The module org.openide.util.lookup was requested in version >= 8.33.1 but only 8.25.1 was found.
+INFO [org.netbeans.modules.netbinox]: Install area set to file:/home/oskar/
+WARNING [org.netbeans.core.modules]: the modules [org.netbeans.modules.xml.text] use org.netbeans.modules.editor.deprecated.pre65formatting which is deprecated.
+WARNING [org.netbeans.core.modules]: the modules [org.netbeans.modules.ide.kit, org.netbeans.modules.xml.text] use org.netbeans.modules.editor.structure which is deprecated.
