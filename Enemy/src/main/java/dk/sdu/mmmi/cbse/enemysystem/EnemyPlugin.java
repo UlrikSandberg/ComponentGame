@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.enemysystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ControlPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
@@ -24,7 +25,7 @@ public class EnemyPlugin implements IGamePluginService {
 
         // Add entities to the world
         enemy = createEnemyShip(gameData);
-        enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/test1.png");
+        enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
         world.addEntity(enemy);
     }
 
@@ -50,6 +51,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyShip.add(new PositionPart(x, y, radians));
         enemyShip.add(new LifePart(1));
+        enemyShip.add(new ControlPart(true));
 
         return enemyShip;
     }

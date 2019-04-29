@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.enemysystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ControlPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
@@ -25,32 +26,35 @@ public class EnemyControlSystem implements IEntityProcessingService {
             PositionPart positionPart = enemy.getPart(PositionPart.class);
             MovingPart movingPart = enemy.getPart(MovingPart.class);
             LifePart lifePart = enemy.getPart(LifePart.class);
+            ControlPart controlPart = enemy.getPart(ControlPart.class);
 
-            Random rand = new Random();
+            if(!controlPart.getIsEnabled()){
+                Random rand = new Random();
 
-            float rng = rand.nextFloat();
+                float rng = rand.nextFloat();
 
-            if (rng > 0.1f && rng < 0.9f) {
-                movingPart.setUp(true);
+                if (rng > 0.1f && rng < 0.9f) {
+                    movingPart.setUp(true);
+                }
+
+                if (rng < 0.2f) {
+                    movingPart.setLeft(true);
+                }
+
+                if (rng > 0.8f) {
+                    movingPart.setRight(true);
+                }
             }
+                movingPart.process(gameData, enemy);
+                positionPart.process(gameData, enemy);
+                lifePart.process(gameData, enemy);
 
-            if (rng < 0.2f) {
-                movingPart.setLeft(true);
-            }
+                updateShape(enemy);
 
-            if (rng > 0.8f) {
-                movingPart.setRight(true);
-            }
-
-            movingPart.process(gameData, enemy);
-            positionPart.process(gameData, enemy);
-            lifePart.process(gameData, enemy);
-
-            updateShape(enemy);
-
-            movingPart.setRight(false);
-            movingPart.setLeft(false);
-            movingPart.setUp(false);
+                movingPart.setRight(false);
+                movingPart.setLeft(false);
+                movingPart.setUp(false);
+                
         }
     }
 

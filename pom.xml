@@ -78,6 +78,7 @@
         <module>Background</module>
         <module>Missile</module>
         <module>AsteroidSplitter</module>
+        <module>AI</module>
     </modules>
 
     <properties>

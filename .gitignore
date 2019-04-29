@@ -17,3 +17,5 @@ application/target
 /Background/target/
 /Missile/target/
 /AsteroidSplitter/target/
+
+/AI/target/
