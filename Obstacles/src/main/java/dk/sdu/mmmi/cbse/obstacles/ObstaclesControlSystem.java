@@ -22,6 +22,7 @@ public class ObstaclesControlSystem implements IEntityProcessingService{
 
     @Override
     public void process(GameData gameData, World world) {
+        
     }
     
    
