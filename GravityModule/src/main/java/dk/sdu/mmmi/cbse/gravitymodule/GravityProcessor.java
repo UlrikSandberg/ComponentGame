@@ -9,6 +9,7 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.GravityPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 /**
@@ -24,13 +25,17 @@ public class GravityProcessor implements IEntityProcessingService {
             if(e.getPart(GravityPart.class) != null)
             {
                 GravityPart gPart = e.getPart(GravityPart.class);
+                 /*PositionPart pPositionPart 
                 
                 //Check for all entities, if they are within a certain radius pull them towards and if they hit the blackhole they die!
                 for (Entity f : world.getEntities()) {
                     
+                    PositionPart pPart = f.getPart(PositionPart.class);
                     
+                    //Calculate the distance between 
+                    ppart
                     
-                }
+                }*/
             }
         }
     }
