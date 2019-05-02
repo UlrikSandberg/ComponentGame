@@ -138,6 +138,10 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Blackhole</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>Obstacles</artifactId>
             <version>${project.version}</version>
         </dependency>

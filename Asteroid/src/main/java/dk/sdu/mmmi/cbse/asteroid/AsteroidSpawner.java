@@ -44,8 +44,25 @@ public class AsteroidSpawner extends TimerTask {
     @Override
     public void run() {
         
+        int numberOfEntities = 0;
         //Check the number of asteroids ingame, if the number has succeded a certain value dont spawn additional asteroids
+        for (Entity e : world.getEntities(Asteroid.class)) {
+            
+            if(e.getPart(LifePart.class) != null)
+            {
+                LifePart lPart = e.getPart(LifePart.class);
+                if(lPart.getLife() == 3)
+                {
+                    numberOfEntities++;
+                }
+            }
+        }
         
+        if(numberOfEntities > 20)
+        {
+            System.out.println("To many entities to spawn");
+            return;
+        }
         
         //Calculate the number of asteroid to spawn
         LocalDateTime now = LocalDateTime.now();

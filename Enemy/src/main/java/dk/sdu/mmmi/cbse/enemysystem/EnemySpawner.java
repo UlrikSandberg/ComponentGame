@@ -32,7 +32,6 @@ public class EnemySpawner extends TimerTask {
     private Entity enemy;
     
     
-    
     public EnemySpawner(GameData gameData, World world){
         this.gameData = gameData;
         this.world = world;
@@ -41,6 +40,19 @@ public class EnemySpawner extends TimerTask {
 
     @Override
     public void run() {
+        
+        int numberOfEnemies = 0;
+        
+        for(Entity e : world.getEntities(Enemy.class))
+        {
+            numberOfEnemies++;
+        }
+        
+        if(numberOfEnemies > 5)
+        {
+            System.out.println("Can't spawn more enemies at the moment");
+            return;
+        }
         
         LocalDateTime now = LocalDateTime.now();
         
