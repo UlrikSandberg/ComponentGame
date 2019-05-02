@@ -79,6 +79,7 @@
         <module>Missile</module>
         <module>AsteroidSplitter</module>
         <module>AI</module>
+        <module>Powerup</module>
     </modules>
 
     <properties>
