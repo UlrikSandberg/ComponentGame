@@ -28,6 +28,7 @@ public class JarFileHandleStream extends FileHandleStream {
             String jarFilePath = args[0];
             String test = pathString[0] + pathString[1];
             jarFile = new JarFile(test);
+            System.out.println(test); 
         } catch (IOException ex) {
             Logger.getLogger(JarFileHandleStream.class.getName()).log(Level.SEVERE, null, ex);
         }

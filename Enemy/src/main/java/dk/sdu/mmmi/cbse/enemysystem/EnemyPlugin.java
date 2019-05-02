@@ -26,6 +26,7 @@ public class EnemyPlugin implements IGamePluginService {
         // Add entities to the world
         enemy = createEnemyShip(gameData);
         enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
+                                                        //"/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
         world.addEntity(enemy);
     }
 

@@ -80,6 +80,7 @@
         <module>AsteroidSplitter</module>
         <module>AI</module>
         <module>Powerup</module>
+        <module>Obstacles</module>
     </modules>
 
     <properties>
