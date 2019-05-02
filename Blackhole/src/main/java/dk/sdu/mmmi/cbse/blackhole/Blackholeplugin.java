@@ -41,20 +41,20 @@ public class Blackholeplugin implements IGamePluginService {
         hole1.add(new PositionPart(gameData.getDisplayHeight() / 5, gameData.getDisplayWidth() / 5, 0));
         hole1.setSprite(BlackHoleImage);
         hole1.add(new NonCollidable()); 
-        hole1.add(new GravityPart()); 
+        hole1.add(new GravityPart(40)); 
         
         hole2.add(new SizePart(400, 400));
         hole2.add(new PositionPart(gameData.getDisplayHeight() - 100, gameData.getDisplayWidth() / 2, 0));
         hole2.setSprite(BlackHoleImage);
         hole2.add(new NonCollidable()); 
-        hole2.add(new GravityPart()); 
+        hole2.add(new GravityPart(40)); 
         
         
         hole3.add(new SizePart(400, 400));
         hole3.add(new PositionPart(gameData.getDisplayHeight() / 2, gameData.getDisplayWidth() / 2, 0));
         hole3.setSprite(BlackHoleImage);
         hole3.add(new NonCollidable()); 
-        hole3.add(new GravityPart()); 
+        hole3.add(new GravityPart(40)); 
         
         world.addEntity(hole1);
         world.addEntity(hole2);

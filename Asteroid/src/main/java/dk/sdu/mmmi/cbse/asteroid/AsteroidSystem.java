@@ -19,8 +19,6 @@ import org.openide.util.lookup.ServiceProviders;
     @ServiceProvider(service = IEntityProcessingService.class),})
 public class AsteroidSystem implements IEntityProcessingService {
 
-    
-    
     int numPoints = 6;
     Random rnd = new Random(10);
     float angle = 0;

@@ -28,13 +28,11 @@ import java.util.UUID;
  */
 public class AsteroidSpawner extends TimerTask {
 
-    
     private GameData gameData;
     private World world;
     private String jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
     private Random rn = new Random(10);
     private LocalDateTime then;
-    
     
     public AsteroidSpawner(GameData gameData, World world)
     {
@@ -45,6 +43,9 @@ public class AsteroidSpawner extends TimerTask {
     
     @Override
     public void run() {
+        
+        //Check the number of asteroids ingame, if the number has succeded a certain value dont spawn additional asteroids
+        
         
         //Calculate the number of asteroid to spawn
         LocalDateTime now = LocalDateTime.now();

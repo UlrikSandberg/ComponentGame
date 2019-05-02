@@ -51,7 +51,6 @@ public class AsteroidPlugin implements IGamePluginService {
     private void StartSpawner(GameData data, World world)
     {
         Timer timer = new Timer();
-        
         timer.scheduleAtFixedRate(new AsteroidSpawner(data, world), 0, 5000);
     }
     
