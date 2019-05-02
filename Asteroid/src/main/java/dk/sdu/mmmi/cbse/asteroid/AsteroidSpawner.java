@@ -15,53 +15,54 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
-import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
-import org.openide.util.lookup.ServiceProvider;
-import org.openide.util.lookup.ServiceProviders;
 
 /**
  *
- * @author Phillip Olsen
+ * @author ulriksandberg
  */
-@ServiceProviders(value = {
-    @ServiceProvider(service = IGamePluginService.class),})
-public class AsteroidPlugin implements IGamePluginService {
+public class AsteroidSpawner extends TimerTask {
 
-    private Entity asteroid;
-    private Random rn = new Random();
-    String jarUrl;
     
-    @Override
-    public void start(GameData gameData, World world) {
-        
-        for (int i =0; i < 25; i++){
-        asteroid = createAsteroid(gameData);
-        jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
-        asteroid.setSprite(jarUrl);
-        world.addEntity(asteroid);
-        }
-        StartSpawner(gameData, world);
-    }
-
-    private void StartSpawner(GameData data, World world)
+    private GameData gameData;
+    private World world;
+    private String jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
+    private Random rn = new Random(10);
+    private LocalDateTime then;
+    
+    
+    public AsteroidSpawner(GameData gameData, World world)
     {
-        Timer timer = new Timer();
-        
-        timer.scheduleAtFixedRate(new AsteroidSpawner(data, world), 0, 5000);
+        this.gameData = gameData;
+        this.world = world;
+        then = LocalDateTime.now();
     }
     
     @Override
-    public void stop(GameData gameData, World world) {
-        for (Entity e : world.getEntities(Asteroid.class)) {
-            world.removeEntity(e);
+    public void run() {
+        
+        //Calculate the number of asteroid to spawn
+        LocalDateTime now = LocalDateTime.now();
+        
+        long seconds = ChronoUnit.SECONDS.between(then, now);
+        
+        int value = (int)(seconds / 30);
+        
+        for(int i = 0; i < value; i++)
+        {
+            Entity asteroid = createAsteroid(gameData);
+            jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
+            asteroid.setSprite(jarUrl);
+            world.addEntity(asteroid);
+            System.out.println("Spawning");
         }
     }
-
+    
     private Asteroid createAsteroid(GameData gameData) {
         float speed = (float) Math.random() * 10f + 40f;
         float radians = 3.1415f / 2 + (float) Math.random();
@@ -76,7 +77,7 @@ public class AsteroidPlugin implements IGamePluginService {
 
         Entity asteroid = new Asteroid();
         asteroid.add(new MovingPart(0, speed, speed, 0));
-        asteroid.add(new PositionPart(rn.nextInt(8000), rn.nextInt(5000), radians));
+        asteroid.add(new PositionPart(rn.nextInt(gameData.getDisplayWidth()), rn.nextInt(gameData.getDisplayHeight()), radians));
         asteroid.add(new LifePart(3));
         asteroid.add(new SplitterPart(asteroid.getID()));
         asteroid.add(new SizePart(80, 80));

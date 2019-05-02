@@ -63,8 +63,8 @@ public class Game implements ApplicationListener {
     
     private CameraManager cameraManager;
 
-    private static final int GAME_HEIGHT = 5000;
-    private static final int GAME_WIDTH = 8000;
+    private static final int GAME_HEIGHT = 2500;
+    private static final int GAME_WIDTH = 4000;
     
     
     @Override

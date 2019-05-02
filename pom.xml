@@ -79,6 +79,8 @@
         <module>Missile</module>
         <module>AsteroidSplitter</module>
         <module>AI</module>
+        <module>Blackhole</module>
+        <module>GravityModule</module>
     </modules>
 
     <properties>

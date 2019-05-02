@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CreatedMetaDataPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.NonCollidable;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
@@ -22,6 +23,12 @@ public class CollisionDetector implements IPostEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
         for (Entity e : world.getEntities()) {
+            
+            if(e.getPart(NonCollidable.class) != null)
+            {
+                continue;
+            }
+            
             for (Entity f : world.getEntities()) {
                 if (e.getID().equals(f.getID())) {
                     continue;
