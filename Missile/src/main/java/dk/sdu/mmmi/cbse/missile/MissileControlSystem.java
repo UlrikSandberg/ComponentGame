@@ -32,9 +32,9 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
     
     private Entity missile;
     
-    private String imageurl = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
-    private String soundurl = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/MissileSound.mp3";
-    private String weaponimage = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/MissileTurret.jpg";
+    //private String imageurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
+    private String soundurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/MissileSound.mp3";
+    private String weaponimage = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/MissileTurret.jpg";
     
     private boolean isoncooldown = false;
     private LocalDateTime cooldown = LocalDateTime.now(); 
@@ -92,7 +92,7 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
         // Projectile Part only used for better collision detection     
         m.add(new ProjectilePart(uuid.toString()));
         m.setRadius(2);
-        m.setSprite(imageurl);
+        //m.setSprite(imageurl);
         m.setSpawnSound(soundurl); 
         
         float[] colour = new float[4];

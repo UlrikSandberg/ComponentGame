@@ -152,9 +152,9 @@ public class AStar {
                 }
             }
         }catch(ArrayIndexOutOfBoundsException ex){
-            System.out.println(ex);
+            //System.out.println(ex);
         }catch(IndexOutOfBoundsException ex){
-            System.out.println(ex);
+            //System.out.println(ex);
         }
     }
 

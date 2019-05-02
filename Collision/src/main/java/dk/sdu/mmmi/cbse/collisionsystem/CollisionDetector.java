@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.collisionsystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CollisionDetectionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CreatedMetaDataPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.NonCollidable;
@@ -10,6 +11,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.powerupPart;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -45,6 +47,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                             }
                         }
                     }
+                    
                     // avoid bullets damaging the entity that created said bullet
                     if (f.getPart(ProjectilePart.class) != null) {
                         ProjectilePart fpp = f.getPart(ProjectilePart.class);
@@ -55,6 +58,35 @@ public class CollisionDetector implements IPostEntityProcessingService {
                             }
                         }
                     }
+                    
+                    
+                    // get all entities with power part (player )
+                    if (e.getPart(powerupPart.class) != null) {
+                        
+                        
+                       // player == player
+                        if (f.getPart(powerupPart.class) != null) {
+                            continue;
+                        
+                        }
+                        
+                        // Get 
+                        if (f.getPart(CollisionDetectionPart.class) !=null) {
+                            CollisionDetectionPart collisionDetector = f.getPart(CollisionDetectionPart.class);
+                            collisionDetector.setISCollited(Boolean.TRUE);
+                            powerupPart pw = e.getPart(powerupPart.class);
+                            pw.setIsHit(Boolean.TRUE);
+                        
+                            
+                        }
+                        
+                        
+                        
+                       
+                        
+                        
+                    }
+                    
                     // in case it's an asteroid, let it split
                     if (f.getPart(SplitterPart.class) != null) {
                         

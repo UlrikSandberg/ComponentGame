@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dk.sdu.mmmi.cbse.enemysystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -8,39 +13,48 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.enemy.Enemy;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
-import java.util.Timer;
-import org.openide.util.lookup.ServiceProvider;
-import org.openide.util.lookup.ServiceProviders;
+import java.util.TimerTask;
 
-@ServiceProviders(value = {
-    @ServiceProvider(service = IGamePluginService.class),})
-public class EnemyPlugin implements IGamePluginService {
-
+/**
+ *
+ * @author magnusm
+ */
+public class EnemySpawner extends TimerTask {   
+    
+    private GameData gameData; 
+    private World world; 
+    private Random rn = new Random();
+    private LocalDateTime then;
     private Entity enemy;
+    
+    
+    
+    public EnemySpawner(GameData gameData, World world){
+        this.gameData = gameData;
+        this.world = world;
+        this.then = LocalDateTime.now();
+    }
 
     @Override
-    public void start(GameData gameData, World world) {
+    public void run() {
         
-        startSpawner(gameData,world);
-        // Add entities to the world
-        enemy = createEnemyShip(gameData);
-        enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
-                                                        //"/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
-        world.addEntity(enemy);
+        LocalDateTime now = LocalDateTime.now();
         
+        long seconds = ChronoUnit.SECONDS.between(then, now);
+        
+        int value = (int)(seconds/45);
+        
+        for(int i = 0; i<value; i++){
+            enemy = createEnemyShip(gameData);
+            world.addEntity(enemy);
+            System.out.println("Spawing enemy");
+        }
     }
     
-    private void startSpawner(GameData gameData, World world){
-        Timer timer = new Timer();
-        
-        timer.scheduleAtFixedRate(new EnemySpawner(gameData,world), 0, 5000);
-       
-    }
-    
-
     private Entity createEnemyShip(GameData gameData) {
 
         float deacceleration = 10;
@@ -65,14 +79,9 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.add(new LifePart(1));
         enemyShip.add(new ControlPart(true));
         enemyShip.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
+        ControlPart controlPart = enemyShip.getPart(ControlPart.class);
+        controlPart.setIsEnabled(true);
 
         return enemyShip;
-    }
-
-    @Override
-    public void stop(GameData gameData, World world) {
-        // Remove entities
-        world.removeEntity(enemy);
-    }
-
+}
 }
