@@ -13,6 +13,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.CreatedMetaDataPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
@@ -68,6 +69,7 @@ public class AsteroidPlugin implements IGamePluginService {
         asteroid.add(new PositionPart(rn.nextInt(8000), rn.nextInt(5000), radians));
         asteroid.add(new LifePart(3));
         asteroid.add(new SplitterPart(asteroid.getID()));
+        asteroid.add(new SizePart(80, 80));
         asteroid.add(new CreatedMetaDataPart(LocalDateTime.now()));
         asteroid.setColour(colour);
         UUID uuid = UUID.randomUUID();

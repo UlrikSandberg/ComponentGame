@@ -51,6 +51,12 @@ public class CollisionDetector implements IPostEntityProcessingService {
                     // in case it's an asteroid, let it split
                     if (f.getPart(SplitterPart.class) != null) {
                         
+                        //Check if the collision was with another asteroid
+                        if(e.getPart(SplitterPart.class) != null)
+                        {
+                            continue;
+                        }
+                        
                         //Check if the entity has recently been created
                         CreatedMetaDataPart metaData = f.getPart(CreatedMetaDataPart.class);
                         
@@ -60,7 +66,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                             
                             long millis = ChronoUnit.MILLIS.between(metaData.getDate(), now);
                             
-                            if(millis < 500)
+                            if(millis < 1000)
                             {
                                 continue;
                             }

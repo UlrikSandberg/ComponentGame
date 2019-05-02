@@ -10,6 +10,23 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Entity implements Serializable {
 
     private final UUID ID = UUID.randomUUID();
+    private UUID parentId;
+
+    public UUID getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(UUID parentId) {
+        this.parentId = parentId;
+    }
+
+    public Map<Class, EntityPart> getParts() {
+        return parts;
+    }
+
+    public void setParts(Map<Class, EntityPart> parts) {
+        this.parts = parts;
+    }
 
     private float[] shapeX = new float[4];
     private float[] shapeY = new float[4];

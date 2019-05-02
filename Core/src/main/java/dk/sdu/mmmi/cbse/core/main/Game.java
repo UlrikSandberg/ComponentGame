@@ -23,6 +23,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.NonEntity;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -183,7 +184,17 @@ public class Game implements ApplicationListener {
                 PositionPart part = entity.getPart(PositionPart.class);
                 Sprite sprite = new Sprite(assetManager.get(entity.getSprite(), Texture.class) );
                 
-                sprite.setSize(40, 40);
+                SizePart sPart = entity.getPart(SizePart.class);
+                
+                if(sPart != null)
+                {
+                    sprite.setSize(sPart.getWidth(), sPart.getHeight());
+                }
+                else
+                {
+                    sprite.setSize(40, 40);
+                }
+                
                
                 sprite.setOriginCenter();
                 //Make spawn sound
