@@ -5,8 +5,10 @@
  */
 package dk.sdu.mmmi.cbse.obstacles;
 
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
@@ -22,7 +24,10 @@ public class ObstaclesControlSystem implements IEntityProcessingService{
 
     @Override
     public void process(GameData gameData, World world) {
-        
+        for(Entity obstacle : world.getEntities(Obstacle.class)){
+            PositionPart positionPart = obstacle.getPart(PositionPart.class);
+            positionPart.process(gameData, obstacle);
+        }
     }
     
    

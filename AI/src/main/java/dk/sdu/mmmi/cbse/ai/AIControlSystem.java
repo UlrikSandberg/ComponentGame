@@ -48,7 +48,7 @@ public class AIControlSystem implements IEntityProcessingService{
                             if(
                                (blockPosPart.getX() != posPart.getX() && blockPosPart.getY() != posPart.getY()) &&
                                (blockPosPart.getX() != gameData.getPlayerPositionX() && blockPosPart.getY() != gameData.getPlayerPositionY()) &&
-                               (blockPosPart.getX() < 4300 && blockPosPart.getY() < 2850)
+                               (blockPosPart.getX() < gameData.getDisplayWidth() && blockPosPart.getY() < gameData.getDisplayHeight())
                                     ){
                                     blocks.add(new Node((int)blockPosPart.getX(), (int)blockPosPart.getY()));
                             }

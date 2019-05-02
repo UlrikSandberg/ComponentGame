@@ -12,5 +12,5 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
  * @author oskar
  */
 public class Obstacle extends Entity{
-    public static final int DEFAULT_SIZE = 100;
+    public static final int DEFAULT_SIZE = 500;
 }
