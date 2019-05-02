@@ -111,15 +111,21 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 }
 
                 LifePart lpe = e.getPart(LifePart.class);
-                if (lpe.isDead()) {
+                if(lpe != null)
+                {
+                    if (lpe.isDead()) {
                     world.removeEntity(e);
                 }
+                }
+                
 
                 LifePart lpf = f.getPart(LifePart.class);
-                if (lpf.isDead()) {
-                    world.removeEntity(f);
+                if(lpf != null)
+                {
+                    if (lpf.isDead()) {
+                        world.removeEntity(f);
+                    }
                 }
-
             }
         }
     }
