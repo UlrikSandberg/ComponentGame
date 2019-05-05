@@ -83,8 +83,11 @@
         <module>Obstacles</module>
         <module>Blackhole</module>
         <module>GravityModule</module>
+<<<<<<< Updated upstream
         <module>CommonProjectile</module>
         <module>CommonPlayer</module>
+=======
+>>>>>>> Stashed changes
         <module>Score</module>
     </modules>
 
