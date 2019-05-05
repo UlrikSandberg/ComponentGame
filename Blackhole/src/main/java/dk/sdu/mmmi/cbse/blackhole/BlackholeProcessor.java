@@ -5,8 +5,15 @@
  */
 package dk.sdu.mmmi.cbse.blackhole;
 
+import dk.sdu.mmmi.cbse.blackhole.Collision.BoxCollision;
+import dk.sdu.mmmi.cbse.blackhole.Collision.Coordinates;
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.GravityPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.NonCollidable;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -24,6 +31,58 @@ public class BlackholeProcessor implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
         
         //Check for all entities, if they are within a certain radius pull them towards and if they hit the blackhole they die!
-        
+        for(Entity hole : world.getEntities(Blackhole.class))
+        {
+            for(Entity e : world.getEntities())
+            {
+                if(e.getPart(NonCollidable.class) != null)
+                {
+                    continue;
+                }
+                
+                PositionPart holeP = hole.getPart(PositionPart.class);
+                SizePart holeS = hole.getPart(SizePart.class );
+                PositionPart eP = e.getPart(PositionPart.class);
+                SizePart eS = e.getPart(SizePart.class);
+
+                double holeWidth = 40;
+                double holeHeight = 40;
+
+                if(holeS != null)
+                {
+                    holeWidth = holeS.getWidth();
+                    holeHeight = holeS.getHeight();
+                }
+
+                double eWidth = 40;
+                double eHeight = 40;
+
+                if(eS != null)
+                {
+                    eWidth = eS.getWidth();
+                    eHeight = eS.getHeight();
+                }
+                
+                
+                //Check for collision.
+                //Foreach of rectangle f points, check if they are inside rectangle e's x and y range
+                double xStart = holeP.getX() + holeWidth / 3;
+                double xEnd = holeP.getX() + (holeWidth / 3) * 2;
+
+                double yStart = holeP.getY() + holeHeight / 3;
+                double yEnd = holeP.getY() + (holeHeight / 3) * 2;
+
+                BoxCollision box = new BoxCollision(new Coordinates(eP.getX(), eP.getY()), new Coordinates(eP.getX() + eWidth, eP.getY()), new Coordinates(eP.getX(), eP.getY() + eHeight), new Coordinates(eP.getX() + eWidth, eP.getY() + eHeight));
+
+                for(Coordinates coor : box.GetCoordinateList())
+                {
+                    if(coor.getX() >= xStart && coor.getX() < xEnd && coor.getY() > yStart && coor.getY() < yEnd)
+                    {
+                        System.out.println("Sucked into a blackhole forever!");
+                        world.removeEntity(e); 
+                    }
+                }
+            }
+        }
     }
 }

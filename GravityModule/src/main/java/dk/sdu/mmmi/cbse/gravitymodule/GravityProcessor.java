@@ -83,7 +83,7 @@ public class GravityProcessor implements IEntityProcessingService {
                         
                         //This kinda works, but does not feel so smooth
                         //Should vary as a function of how close we are to the respective object
-                        double gravitationalStrength = Math.pow(delta, -0.99)*500;
+                        double gravitationalStrength = Math.pow(delta, gPart.getGravitationalPotens())*gPart.getGravitationFactor();
                         
                         if(gravitationalStrength > delta)
                         {
