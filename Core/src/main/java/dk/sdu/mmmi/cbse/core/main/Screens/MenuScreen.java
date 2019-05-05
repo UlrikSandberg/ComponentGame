@@ -48,7 +48,7 @@ public class MenuScreen implements Screen
         game.batch.begin();
         
         game.font.setScale(1.5f);
-        game.font.draw(game.batch, "Space :Endgame", 400, 600);
+        game.font.draw(game.batch, "Space:Endgame", 400, 600);
         game.font.draw(game.batch, "Press the number of the menu you want to go into", 400, 400);
         game.font.draw(game.batch, "1:Play", 400, 300);
         game.font.draw(game.batch, "2: High score", 400, 250);

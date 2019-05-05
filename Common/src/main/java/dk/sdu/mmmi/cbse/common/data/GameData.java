@@ -18,7 +18,17 @@ public class GameData {
     private float radians;
     private String selectedWeaponImage;
     private int selectedWeapon = 1;
+    private boolean gameOver = false;
 
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+    
+    
     public int getSelectedWeapon() {
         return selectedWeapon;
     }

@@ -14,6 +14,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonprojectile.Projectile;
 import java.io.File;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -38,14 +39,14 @@ public class MissilePlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
-        for (Entity m : world.getEntities(Missile.class)){
+        for (Entity m : world.getEntities(Projectile.class)){
             world.removeEntity(m);
         }
     
     }
     
     private Entity createMissile(float x, float y, float radians, String uuid) {
-        Entity m = new Missile();
+        Entity m = new Projectile();
 
         m.add(new PositionPart(x, y, radians));
         m.add(new MovingPart(0, 5000, 800, 0));

@@ -8,7 +8,9 @@ package dk.sdu.mmmi.cbse.obstacles;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.GravityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.NonCollidable;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -61,7 +63,9 @@ public class ObstaclesPlugin implements IGamePluginService{
         Entity obstacle = new Obstacle();
         obstacle.setRadius(Obstacle.DEFAULT_SIZE / 2);
         obstacle.add(new PositionPart(x, y, 1));
+        obstacle.add(new NonCollidable()); 
         obstacle.add(new SizePart(Obstacle.DEFAULT_SIZE, Obstacle.DEFAULT_SIZE));
+        obstacle.add(new GravityPart(800)); 
         
         
         return obstacle;

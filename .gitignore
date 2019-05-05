@@ -25,3 +25,5 @@ AI/target
 /Obstacles/target/
 /Blackhole/target/
 /GravityModule/target/
+/CommonPlayer/target/
+/CommonProjectile/target/

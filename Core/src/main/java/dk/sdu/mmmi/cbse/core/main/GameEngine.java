@@ -124,6 +124,11 @@ public class GameEngine implements Screen{
     @Override
     public void render(float f) {
         
+        if(gameData.isGameOver())
+        {
+            gameInit.setScreen(new MenuScreen(gameInit)); 
+        }
+        
         // clear screen to black
         Gdx.gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

@@ -16,6 +16,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
+import dk.sdu.mmmi.cbse.commonprojectile.Projectile;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -62,7 +63,7 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
             }
         }
 
-        for (Entity m : world.getEntities(Missile.class)) {
+        for (Entity m : world.getEntities(Projectile.class)) {
             PositionPart ppb = m.getPart(PositionPart.class);
             MovingPart mpb = m.getPart(MovingPart.class);
             TimerPart btp = m.getPart(TimerPart.class);
@@ -83,7 +84,7 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
     }
     
     private Entity createMissile(float x, float y, float radians, String uuid) {
-        Entity m = new Missile();
+        Entity m = new Projectile();
 
         m.add(new PositionPart(x, y, radians));
         m.add(new MovingPart(0, 1500, 800, 0));

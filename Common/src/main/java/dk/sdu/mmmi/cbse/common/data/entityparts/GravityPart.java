@@ -15,10 +15,29 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 public class GravityPart implements EntityPart {
 
     private double gravitationalPullDistance;
+    private double eventHorizonRadius = 20;
+    private boolean hasEventHorizon = false;
+    
 
     public GravityPart(double gravitationalPullDistance)
     {
         this.gravitationalPullDistance = gravitationalPullDistance;
+    }
+
+    public double getEventHorizonRadius() {
+        return eventHorizonRadius;
+    }
+
+    public void setEventHorizonRadius(double eventHorizonRadius) {
+        this.eventHorizonRadius = eventHorizonRadius;
+    }
+
+    public boolean isHasEventHorizon() {
+        return hasEventHorizon;
+    }
+
+    public void setHasEventHorizon(boolean hasEventHorizon) {
+        this.hasEventHorizon = hasEventHorizon;
     }
     
     
