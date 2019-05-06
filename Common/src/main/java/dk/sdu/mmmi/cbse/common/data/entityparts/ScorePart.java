@@ -19,6 +19,14 @@ public class ScorePart implements EntityPart{
 private int points;
 private boolean canGetPoints = false;
 
+    public ScorePart(int points){
+        this.points = points;
+    }
+    
+    public ScorePart(boolean canGetPoints){
+        this.canGetPoints = canGetPoints;
+    }
+
     public int getPoints() {
         return points;
     }

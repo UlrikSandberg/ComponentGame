@@ -9,6 +9,7 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ScorePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.powerupPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -69,6 +70,7 @@ public class PlayerPlugin implements IGamePluginService {
         playerShip.add(new ShootingPart(uuid.toString()));
         playerShip.add(new LifePart(1));
         playerShip.add(new powerupPart());
+        playerShip.add(new ScorePart(true));
         
         return playerShip;
     }

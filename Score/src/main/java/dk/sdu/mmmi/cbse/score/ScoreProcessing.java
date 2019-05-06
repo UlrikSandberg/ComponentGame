@@ -10,29 +10,28 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
-import java.io.File;
-import java.util.Random;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ScorePart;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
+
 /**
  *
  * @author Mark
  */
 @ServiceProviders(value = {
-    @ServiceProvider(service = IGamePluginService.class),})
-public class ScorePlugin implements IGamePluginService{
+    @ServiceProvider(service = IEntityProcessingService.class),})
+public class ScoreProcessing implements IEntityProcessingService{
 
     @Override
-    public void start(GameData gameData, World world) {
+    public void process(GameData gameData, World world) {
         
-    }
-
-    @Override
-    public void stop(GameData gameData, World world) {
         
+        for (Entity e : world.getEntities()){
+            if(e.getPart(ScorePart.class) != null){
+                ScorePart scorePart = e.getPart(ScorePart.class);
+                scorePart.addPoints(1);
+            }                    
+        }
     }
-    
 }

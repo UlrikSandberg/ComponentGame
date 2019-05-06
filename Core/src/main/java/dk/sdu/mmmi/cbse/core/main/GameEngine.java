@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.NonEntity;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ScorePart;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
@@ -24,6 +25,7 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
+import dk.sdu.mmmi.cbse.core.main.Screens.MenuScreen;
 import dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver;
 import dk.sdu.mmmi.cbse.core.managers.CameraManager;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
@@ -59,7 +61,7 @@ public class GameEngine implements Screen{
     private static final int GAME_HEIGHT = 5000;
     private static final int GAME_WIDTH = 8000;
 
-    public GameEngine(GameInitializer gmaeInit)
+    public GameEngine(GameInitializer gameInit)
     {
         this.gameInit = gameInit;
         
@@ -135,7 +137,21 @@ public class GameEngine implements Screen{
         DrawNonEntities();
         draw();
         drawToggleWeapon();
+        
         batch.end();
+        
+        batch.begin();
+        
+        for (Entity e : world.getEntities()){
+            if (e.getPart(ScorePart.class) != null){
+                ScorePart sp = e.getPart(ScorePart.class);
+                gameInit.font.setScale(1.5f);
+                gameInit.font.draw(batch, "Score:" , 400, 600);
+                System.out.println(sp.getPoints());
+            }
+        }
+        batch.end();
+        
     }
 
     private void drawToggleWeapon()
@@ -280,6 +296,20 @@ public class GameEngine implements Screen{
                 entity.setIsLoaded(true);
             }
         }
+    }
+    
+    private void drawScore(SpriteBatch batch){
+        
+        for (Entity e : world.getEntities()){
+            if (e.getPart(ScorePart.class) != null){
+                ScorePart sp = e.getPart(ScorePart.class);
+                gameInit.font.setScale(1.5f);
+                gameInit.font.draw(batch, "Score:" + sp.getPoints(), 400, 600);
+            }
+        }
+        
+        
+        
     }
     
      
