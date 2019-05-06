@@ -11,6 +11,7 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ControlPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -62,6 +63,13 @@ public class AIControlSystem implements IEntityProcessingService{
                     aStar.setBlocks(blocks);
                     List<Node> path = aStar.findPath();
                     
+                    if((Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)) < 300) &&
+                            (Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)) < 300)){
+                        shoot(posPart, finalNode, entity);
+                        System.out.println("RangeX: " + Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)));
+                        System.out.println("RangeY: " + Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)));
+                    } 
+                    
                     if(!path.isEmpty()){
                         if(path.size() > 1){
                             
@@ -76,12 +84,27 @@ public class AIControlSystem implements IEntityProcessingService{
         }
     }
     
+    public void shoot(PositionPart initialNodePos, Node finalNode, Entity aiControlled){
+        float angle = (float) Math.atan2(Math.abs(finalNode.getY() - initialNodePos.getY()), 
+                Math.abs(finalNode.getX() - initialNodePos.getX())); 
+        
+        initialNodePos.setRadians(angle);
+        
+        ShootingPart shootingPart = aiControlled.getPart(ShootingPart.class);
+        
+        if(shootingPart != null){
+        shootingPart.setIsShooting(true);
+        } 
+    }
+    
     public void move(PositionPart pos, Node nextStep){
         int px = (int)pos.getX();
         int py = (int)pos.getY();
         
         int gx = nextStep.getX();
         int gy = nextStep.getY();
+        
+        
         
         if(px < gx) pos.setX(pos.getX() + 3);
         if(px > gx) pos.setX(pos.getX() - 3);
