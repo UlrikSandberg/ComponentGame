@@ -9,6 +9,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonprojectile.Projectile;
 import java.io.File;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -31,14 +32,14 @@ public class BulletPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         for (Entity e : world.getEntities()) {
-            if (e.getClass() == Bullet.class) {
+            if (e.getClass() == Projectile.class) {
                 world.removeEntity(e);
             }
         }
     }
     
     private Entity createBullet(float x, float y, float radians, String uuid) {
-        Entity b = new Bullet();
+        Entity b = new Projectile();
 
         b.add(new PositionPart(x, y, radians));
         b.add(new MovingPart(0, 50000, 1000, 0));

@@ -8,6 +8,9 @@ package dk.sdu.mmmi.cbse.powerup;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CollisionDetectionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -26,9 +29,17 @@ public class powerupControlSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
         for (Entity powerup : world.getEntities(powerup.class)) {
             
+            PositionPart positionPart = powerup.getPart(PositionPart.class);
+            CollisionDetectionPart splitterPart = powerup.getPart(CollisionDetectionPart.class);
             
-       
-        }
+            if (splitterPart.getISCollited()) {
+                world.removeEntity(powerup);
+                
+            }
+    }
+    
+    
+   
     }
     
 }

@@ -10,7 +10,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.powerupPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonplayer.Player;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +68,8 @@ public class PlayerPlugin implements IGamePluginService {
         UUID uuid = UUID.randomUUID();
         playerShip.add(new ShootingPart(uuid.toString()));
         playerShip.add(new LifePart(1));
-
+        playerShip.add(new powerupPart());
+        
         return playerShip;
     }
 

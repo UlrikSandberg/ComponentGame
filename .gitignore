@@ -22,3 +22,8 @@ application/target
 AI/target
 /Powerup/target/
 /Obstacles/target/
+/Obstacles/target/
+/Blackhole/target/
+/GravityModule/target/
+/CommonPlayer/target/
+/CommonProjectile/target/

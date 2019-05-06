@@ -1,8 +1,9 @@
 package dk.sdu.mmmi.cbse.core.main;
 
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -12,9 +13,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -28,6 +31,7 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
+import dk.sdu.mmmi.cbse.core.main.Screens.MenuScreen;
 import dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver;
 import dk.sdu.mmmi.cbse.core.managers.CameraManager;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
@@ -39,12 +43,13 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javafx.geometry.Pos;
+import org.lwjgl.opengl.XRandR;
 import org.lwjgl.util.vector.Matrix;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 
-public class Game implements ApplicationListener {
+public class GameEngine implements Screen{
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
@@ -53,22 +58,24 @@ public class Game implements ApplicationListener {
     private World world = new World();
     private List<IGamePluginService> gamePlugins = new CopyOnWriteArrayList<>();
     private Lookup.Result<IGamePluginService> result;
-    private SpriteBatch batch;
+    public SpriteBatch batch;
     private Graphics2D g2d;
     private Sprite sprite;
     private Sprite Astsprite;
     private Music music;
     
-    private AssetManager assetManager;
-    
+    public AssetManager assetManager;
     private CameraManager cameraManager;
+    public BitmapFont font;
+    private GameInitializer gameInit;
 
     private static final int GAME_HEIGHT = 5000;
     private static final int GAME_WIDTH = 8000;
-    
-    
-    @Override
-    public void create() {
+
+    public GameEngine(GameInitializer gmaeInit)
+    {
+        this.gameInit = gameInit;
+        
         gameData.setDisplayWidth(GAME_WIDTH);
         gameData.setDisplayHeight(GAME_HEIGHT);
         
@@ -87,8 +94,8 @@ public class Game implements ApplicationListener {
         float x = gameData.getPlayerPositionX();
         float y = gameData.getPlayerPositionY();
         
-        AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
-        assetManager = new AssetManager(jfhr);
+       AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
+       assetManager = new AssetManager(jfhr);
         
         batch.begin();
         //sprite.setCenter(gameData.getPlayerPositionX(), gameData.getPlayerPositionY());
@@ -115,7 +122,13 @@ public class Game implements ApplicationListener {
     }
 
     @Override
-    public void render() {
+    public void render(float f) {
+        
+        if(gameData.isGameOver())
+        {
+            gameInit.setScreen(new MenuScreen(gameInit)); 
+        }
+        
         // clear screen to black
         Gdx.gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -210,6 +223,8 @@ public class Game implements ApplicationListener {
                         }
                     }
                 }
+                
+                
         
                 sprite.flip(false, false);
                 sprite.rotate90(true);
@@ -370,4 +385,19 @@ public class Game implements ApplicationListener {
         }
 
     };
+
+    @Override
+    public void show()
+    {
+       
+    }
+
+    
+
+    @Override
+    public void hide()
+    {
+        
+    }
+
 }

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.sdu.mmmi.cbse.playersystem;
+package dk.sdu.mmmi.cbse.blackhole;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 
 /**
  *
- * @author Emil
+ * @author ulriksandberg
  */
-public class Player extends Entity {
-
+public class Blackhole extends Entity{
+    
 }

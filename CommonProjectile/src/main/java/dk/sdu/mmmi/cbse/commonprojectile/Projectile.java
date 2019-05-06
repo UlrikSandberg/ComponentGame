@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.sdu.mmmi.cbse.missile;
+package dk.sdu.mmmi.cbse.commonprojectile;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 
+
+
 /**
  *
- * @author magnusm
+ * @author ulriksandberg
  */
-public class Missile extends Entity {
+public class Projectile extends Entity {
     
 }

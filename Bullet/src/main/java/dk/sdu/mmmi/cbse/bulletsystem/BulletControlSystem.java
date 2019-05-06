@@ -15,6 +15,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.commonprojectile.Projectile;
 import java.io.File;
 
 import org.openide.util.lookup.ServiceProvider;
@@ -52,7 +53,7 @@ public class BulletControlSystem implements IEntityProcessingService {
             }
         }
 
-        for (Entity b : world.getEntities(Bullet.class)) {
+        for (Entity b : world.getEntities(Projectile.class)) {
             PositionPart ppb = b.getPart(PositionPart.class);
             MovingPart mpb = b.getPart(MovingPart.class);
             TimerPart btp = b.getPart(TimerPart.class);
@@ -73,7 +74,7 @@ public class BulletControlSystem implements IEntityProcessingService {
 
     //Could potentially do some shenanigans with differing colours for differing sources.
     private Entity createBullet(float x, float y, float radians, String uuid) {
-        Entity b = new Bullet();
+        Entity b = new Projectile();
 
         b.add(new PositionPart(x, y, radians));
         b.add(new MovingPart(0, 5000, 800, 0));

@@ -8,8 +8,11 @@ package dk.sdu.mmmi.cbse.powerup;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CollisionDetectionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
 import org.openide.util.lookup.ServiceProvider;
@@ -44,8 +47,11 @@ public class powerupPlugin implements IGamePluginService {
         powerup = new powerup();
         
         powerup.setSprite(image);
-        powerup.add(new PositionPart(100, 100, 3));
+        powerup.add(new PositionPart(100, 100, 1.6f));
         powerup.add(new LifePart(1));
+        powerup.add(new SizePart(50, 50));
+        powerup.add(new CollisionDetectionPart());
+        
         return powerup;
     }    
 }

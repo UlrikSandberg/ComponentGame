@@ -19,6 +19,7 @@ import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.Timer;
 import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -37,14 +38,22 @@ public class AsteroidPlugin implements IGamePluginService {
     
     @Override
     public void start(GameData gameData, World world) {
+        
         for (int i =0; i < 25; i++){
         asteroid = createAsteroid(gameData);
         jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
         asteroid.setSprite(jarUrl);
         world.addEntity(asteroid);
         }
+        StartSpawner(gameData, world);
     }
 
+    private void StartSpawner(GameData data, World world)
+    {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new AsteroidSpawner(data, world), 0, 5000);
+    }
+    
     @Override
     public void stop(GameData gameData, World world) {
         for (Entity e : world.getEntities(Asteroid.class)) {

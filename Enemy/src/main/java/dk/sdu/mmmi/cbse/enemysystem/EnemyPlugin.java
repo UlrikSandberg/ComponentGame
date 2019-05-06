@@ -12,6 +12,7 @@ import dk.sdu.mmmi.cbse.common.enemy.Enemy;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
 import java.util.Random;
+import java.util.Timer;
 import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -24,13 +25,23 @@ public class EnemyPlugin implements IGamePluginService {
 
     @Override
     public void start(GameData gameData, World world) {
-
+        
+        startSpawner(gameData,world);
         // Add entities to the world
         enemy = createEnemyShip(gameData);
         enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
                                                         //"/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
         world.addEntity(enemy);
+        
     }
+    
+    private void startSpawner(GameData gameData, World world){
+        Timer timer = new Timer();
+        
+        timer.scheduleAtFixedRate(new EnemySpawner(gameData,world), 0, 5000);
+       
+    }
+    
 
     private Entity createEnemyShip(GameData gameData) {
 
@@ -55,6 +66,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.add(new PositionPart(x, y, radians));
         enemyShip.add(new LifePart(1));
         enemyShip.add(new ControlPart(true));
+        enemyShip.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
         enemyShip.add(new ShootingPart("fromEnemy"));
 
         return enemyShip;

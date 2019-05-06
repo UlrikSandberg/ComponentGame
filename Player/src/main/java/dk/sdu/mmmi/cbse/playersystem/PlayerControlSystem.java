@@ -9,7 +9,10 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.powerupPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.commonplayer.Player;
+import java.util.List;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -17,26 +20,38 @@ import org.openide.util.lookup.ServiceProviders;
     @ServiceProvider(service = IEntityProcessingService.class),})
 public class PlayerControlSystem implements IEntityProcessingService {
 
+    
+    
+    
     @Override
     public void process(GameData gameData, World world) {
 
+        List<Entity> players = world.getEntities(Player.class);
+        if(players.size() > 1)
+        {
+            gameData.setGameOver(true);
+            return;
+        }
+        
         for (Entity player : world.getEntities(Player.class)) {
             PositionPart positionPart = player.getPart(PositionPart.class);
             MovingPart movingPart = player.getPart(MovingPart.class);
             ShootingPart shootingPart = player.getPart(ShootingPart.class);
             LifePart lifePart = player.getPart(LifePart.class);
-
+            powerupPart powerPart = player.getPart(powerupPart.class);
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
             movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
             movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
-
             shootingPart.setIsShooting(gameData.getKeys().isDown(GameKeys.SPACE));
             
-            
+            if (powerPart.isHit) {
+                lifePart.process(gameData, player);
+            }
+            powerPart.process(gameData, player);
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
             shootingPart.process(gameData, player);
-            lifePart.process(gameData, player);
+            
             gameData.setSpeed(movingPart.getSpeed());
 
             gameData.setRadians(positionPart.getRadians());
