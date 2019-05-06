@@ -32,6 +32,4 @@ public class ObstaclesControlSystem implements IEntityProcessingService{
             part.setLife(Integer.MAX_VALUE);
         }
     }
-    
-   
 }

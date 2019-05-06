@@ -197,6 +197,16 @@ public class CollisionDetector implements IPostEntityProcessingService {
                         }
                     }
                     
+                    if(e.getPart(powerupPart.class) != null)
+                    {
+                        world.removeEntity(e);
+                    }
+                    
+                    if(f.getPart(powerupPart.class) != null)
+                    {
+                        world.removeEntity(f);
+                    }
+                    
                     LifePart elp = e.getPart(LifePart.class);
                     LifePart flp = f.getPart(LifePart.class);
                     
@@ -211,7 +221,6 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 if(lpe != null)
                 {
                     if (lpe.getLife() < 1) {
-                        System.out.println("e - LifePart dead");
                         world.removeEntity(e);
                     }
                 }
@@ -221,7 +230,6 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 if(lpf != null)
                 {
                     if (lpf.getLife() < 1) {
-                        System.out.println("f - LifePart dead");
                         world.removeEntity(f);
                     }
                 }
