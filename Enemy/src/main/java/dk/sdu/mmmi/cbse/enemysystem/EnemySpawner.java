@@ -88,7 +88,7 @@ public class EnemySpawner extends TimerTask {
         enemyShip.setColour(colour);
         enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyShip.add(new PositionPart(x, y, radians));
-        enemyShip.add(new LifePart(1));
+        enemyShip.add(new LifePart(3));
         enemyShip.add(new ControlPart(true));
         enemyShip.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
         ControlPart controlPart = enemyShip.getPart(ControlPart.class);

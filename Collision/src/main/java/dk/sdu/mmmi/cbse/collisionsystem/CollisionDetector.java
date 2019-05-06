@@ -41,17 +41,32 @@ public class CollisionDetector implements IPostEntityProcessingService {
             {
                 continue;
             }
+            
             for (Entity f : world.getEntities()) {
                 if (e.getID().equals(f.getID()) || f.getPart(NonCollidable.class) != null) {
                     continue;
                 }
                 
                 //*********** SECTION - BULLET NOT COLLODING WITH THE ENTITY THAT SPAWNED THEM
-                
                 if (Collision(e, f, false)) {
                     
                     //Collision was detected...
                     collidingParties = DetermineCollidingParties(e, f);
+                    
+                    if(collidingParties.equals(collidingParties.BulletAndBullet))
+                    {
+                        continue;
+                    }
+                    
+                    if(collidingParties.equals(collidingParties.EnemyAndBullet))
+                    {
+                        world.removeEntity(f);
+                    }
+                    
+                    if(collidingParties.equals(collidingParties.BulletAndEnemy))
+                    {
+                        world.removeEntity(e); 
+                    }
                     
                     //Remove player if collision is between enemy and player
                     if(collidingParties.equals(CollidingParties.EnemyAndPlayer))
@@ -181,24 +196,32 @@ public class CollisionDetector implements IPostEntityProcessingService {
                             continue;
                         }
                     }
-
-                    world.removeEntity(f);
+                    
+                    LifePart elp = e.getPart(LifePart.class);
+                    LifePart flp = f.getPart(LifePart.class);
+                    
+                    elp.setIsHit(true);
+                    flp.setIsHit(true); 
                 }
                 
                 //********** SECTION - END : ASTEROID COLLISION DETECTION
                 
                 LifePart lpe = e.getPart(LifePart.class);
+                
                 if(lpe != null)
                 {
-                    if (lpe.isDead()) {
+                    if (lpe.getLife() < 1) {
+                        System.out.println("e - LifePart dead");
                         world.removeEntity(e);
                     }
                 }
 
                 LifePart lpf = f.getPart(LifePart.class);
+                
                 if(lpf != null)
                 {
-                    if (lpf.isDead()) {
+                    if (lpf.getLife() < 1) {
+                        System.out.println("f - LifePart dead");
                         world.removeEntity(f);
                     }
                 }

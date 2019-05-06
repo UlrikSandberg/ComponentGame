@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.obstacles;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Random;
@@ -27,6 +28,8 @@ public class ObstaclesControlSystem implements IEntityProcessingService{
         for(Entity obstacle : world.getEntities(Obstacle.class)){
             PositionPart positionPart = obstacle.getPart(PositionPart.class);
             positionPart.process(gameData, obstacle);
+            LifePart part = obstacle.getPart(LifePart.class);
+            part.setLife(Integer.MAX_VALUE);
         }
     }
     

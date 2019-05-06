@@ -40,6 +40,7 @@ public class BlackholeProcessor implements IEntityProcessingService {
                     continue;
                 }
                 
+                GravityPart gPart = hole.getPart(GravityPart.class);
                 PositionPart holeP = hole.getPart(PositionPart.class);
                 SizePart holeS = hole.getPart(SizePart.class );
                 PositionPart eP = e.getPart(PositionPart.class);
@@ -78,8 +79,14 @@ public class BlackholeProcessor implements IEntityProcessingService {
                 {
                     if(coor.getX() >= xStart && coor.getX() < xEnd && coor.getY() > yStart && coor.getY() < yEnd)
                     {
-                        System.out.println("Sucked into a blackhole forever!");
-                        world.removeEntity(e); 
+                        world.removeEntity(e);
+                        //Increase size of blackhole
+                        holeS.setWidth(holeS.getWidth()+10);
+                        holeS.setHeight(holeS.getHeight()+10);
+                        gPart.setGravitationalPullDistance(gPart.getGravitationalPullDistance() + 10);
+                        gPart.setGravitationFactor(gPart.getGravitationFactor()+5);
+                        gPart.setGravitationalPotens(gPart.getGravitationalPotens() + 0.01);
+                        
                     }
                 }
             }

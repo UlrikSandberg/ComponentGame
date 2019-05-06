@@ -27,8 +27,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
 
         List<Entity> players = world.getEntities(Player.class);
-        if(players.size() > 1)
+        if(players.size() < 1)
         {
+            System.out.println("The game is over!");
             gameData.setGameOver(true);
             return;
         }

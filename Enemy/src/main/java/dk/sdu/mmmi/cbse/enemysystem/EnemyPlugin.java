@@ -28,16 +28,15 @@ public class EnemyPlugin implements IGamePluginService {
         // Add entities to the world
         enemy = createEnemyShip(gameData);
         enemy.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
-                                                        //"/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
         world.addEntity(enemy);
         
     }
     
-    private void startSpawner(GameData gameData, World world){
+    private void startSpawner(GameData gameData, World world) {
+        
         Timer timer = new Timer();
         
         timer.scheduleAtFixedRate(new EnemySpawner(gameData,world), 0, 5000);
-       
     }
     
 
@@ -62,7 +61,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.setColour(colour);
         enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyShip.add(new PositionPart(x, y, radians));
-        enemyShip.add(new LifePart(1));
+        enemyShip.add(new LifePart(3));
         enemyShip.add(new ControlPart(true));
         enemyShip.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
 

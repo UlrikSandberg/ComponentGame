@@ -29,12 +29,12 @@ public class MissilePlugin implements IGamePluginService {
     
     private Entity missile;
     
-    //private String imageurl = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
-    private String soundurl = new File("").getAbsolutePath() + "/Missile/target/missile-1.0-SNAPSHOT.jar!/images/assets/MissileSound.mp3";
+    private String imageurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
+    private String soundurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/MissileSound.mp3";
 
     @Override
     public void start(GameData gameData, World world) {
-        //world.addEntity(createMissile(0,0,0,imageurl));
+        world.addEntity(createMissile(0,0,0,imageurl));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class MissilePlugin implements IGamePluginService {
         // Projectile Part only used for better collision detection     
         m.add(new ProjectilePart(uuid.toString()));
         m.setRadius(2);
-       // m.setSprite(imageurl);
+        m.setSprite(imageurl);
         m.setSpawnSound(soundurl); 
         
         float[] colour = new float[4];
