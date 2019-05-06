@@ -7,6 +7,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ControlPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.enemy.Enemy;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Random;
@@ -27,6 +28,7 @@ public class EnemyControlSystem implements IEntityProcessingService {
             MovingPart movingPart = enemy.getPart(MovingPart.class);
             LifePart lifePart = enemy.getPart(LifePart.class);
             ControlPart controlPart = enemy.getPart(ControlPart.class);
+            ShootingPart shootingPart = enemy.getPart(ShootingPart.class);
 
             if(!controlPart.getIsEnabled()){
                 Random rand = new Random();
@@ -48,12 +50,14 @@ public class EnemyControlSystem implements IEntityProcessingService {
                 movingPart.process(gameData, enemy);
                 positionPart.process(gameData, enemy);
                 lifePart.process(gameData, enemy);
+                shootingPart.process(gameData, enemy);
 
                 updateShape(enemy);
 
                 movingPart.setRight(false);
                 movingPart.setLeft(false);
                 movingPart.setUp(false);
+                shootingPart.setIsShooting(false);
                 
         }
     }

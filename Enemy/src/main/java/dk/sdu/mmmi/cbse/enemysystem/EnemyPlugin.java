@@ -7,10 +7,12 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ControlPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.enemy.Enemy;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.io.File;
 import java.util.Random;
+import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -53,6 +55,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.add(new PositionPart(x, y, radians));
         enemyShip.add(new LifePart(1));
         enemyShip.add(new ControlPart(true));
+        enemyShip.add(new ShootingPart("fromEnemy"));
 
         return enemyShip;
     }
