@@ -37,8 +37,16 @@ public class Entity implements Serializable {
     private String sprite;
     private String spawnSound;
     private boolean isSpawnSoundLoaded;
-    
     private boolean IsLoaded;
+    private boolean isUsingBoxCollision = true;
+
+    public boolean isIsUsingBoxCollision() {
+        return isUsingBoxCollision;
+    }
+
+    public void setIsUsingBoxCollision(boolean isUsingBoxCollision) {
+        this.isUsingBoxCollision = isUsingBoxCollision;
+    }
     
     
     private boolean isSpawned;

@@ -303,11 +303,11 @@ public class CollisionDetector implements IPostEntityProcessingService {
         else
         {
             //Foreach of rectangle f points, check if they are inside rectangle e's x and y range
-            double xStart = ep.getX();
-            double xEnd = ep.getX() + eWidth - 10;
+            double xStart = ep.getX() + (eWidth / 5);
+            double xEnd = ep.getX() + eWidth - (eWidth / 5);
             
-            double yStart = ep.getY();
-            double yEnd = ep.getY() + eHeight - 10;
+            double yStart = ep.getY() + (eHeight / 5);
+            double yEnd = ep.getY() + eHeight - (eHeight / 5);
             
             BoxCollision box = new BoxCollision(new Coordinates(fp.getX(), fp.getY()), new Coordinates(fp.getX() + fWidth, fp.getY()), new Coordinates(fp.getX(), fp.getY() + fHeight), new Coordinates(fp.getX() + fWidth, fp.getY() + fHeight));
             
