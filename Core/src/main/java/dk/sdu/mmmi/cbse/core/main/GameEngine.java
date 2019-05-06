@@ -115,7 +115,7 @@ public class GameEngine implements Screen{
         
         if(gameData.isGameOver())
         {
-            gameInit.setScreen(new EndScreen(gameInit, 1000.0));
+            gameInit.setScreen(new EndScreen(gameInit, gameData.getPlayerScore()));
         }
         
         // clear screen to black
@@ -138,16 +138,13 @@ public class GameEngine implements Screen{
         draw();
         drawToggleWeapon();
         
-        batch.end();
-        
-        batch.begin();
-        
         for (Entity e : world.getEntities()){
             if (e.getPart(ScorePart.class) != null){
                 ScorePart sp = e.getPart(ScorePart.class);
+                gameInit.batch.begin();
                 gameInit.font.setScale(1.5f);
-                gameInit.font.draw(batch, "Score:" , 400, 600);
-                System.out.println(sp.getPoints());
+                gameInit.font.draw(gameInit.batch, "Score: " + sp.getPoints(), 10, 780);
+                gameInit.batch.end();
             }
         }
         batch.end();

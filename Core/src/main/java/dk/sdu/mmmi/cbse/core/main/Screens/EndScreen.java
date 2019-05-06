@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.core.main.GameEngine;
 import dk.sdu.mmmi.cbse.core.main.GameInitializer;
 
@@ -26,7 +27,7 @@ public class EndScreen implements Screen {
         this.game = gameInit;
         this.highScore = highScore;
     }
-
+    
     @Override
     public void show() {
          //To change body of generated methods, choose Tools | Templates.

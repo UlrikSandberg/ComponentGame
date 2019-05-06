@@ -31,6 +31,9 @@ public class ScoreProcessing implements IEntityProcessingService{
             if(e.getPart(ScorePart.class) != null){
                 ScorePart scorePart = e.getPart(ScorePart.class);
                 scorePart.addPoints(1);
+                if(scorePart.canGetPoints()){
+                    gameData.setPlayerScore(scorePart.getPoints());
+                }
             }                    
         }
     }
