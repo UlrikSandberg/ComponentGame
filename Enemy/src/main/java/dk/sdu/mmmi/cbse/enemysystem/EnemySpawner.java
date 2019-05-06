@@ -12,6 +12,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ControlPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.enemy.Enemy;
 import java.io.File;
 import java.time.LocalDateTime;
@@ -88,8 +89,9 @@ public class EnemySpawner extends TimerTask {
         enemyShip.setColour(colour);
         enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyShip.add(new PositionPart(x, y, radians));
-        enemyShip.add(new LifePart(1));
+        enemyShip.add(new LifePart(3));
         enemyShip.add(new ControlPart(true));
+        enemyShip.add(new ShootingPart("fromEnemy"));
         enemyShip.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");
         ControlPart controlPart = enemyShip.getPart(ControlPart.class);
         controlPart.setIsEnabled(true);

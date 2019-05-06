@@ -7,6 +7,7 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import java.util.function.Function;
 
 /**
  *
@@ -17,8 +18,26 @@ public class GravityPart implements EntityPart {
     private double gravitationalPullDistance;
     private double eventHorizonRadius = 20;
     private boolean hasEventHorizon = false;
-    
 
+    private double gravitationalPotens = -0.99;
+    private double gravitationFactor = 500;
+
+    public double getGravitationalPotens() {
+        return gravitationalPotens;
+    }
+
+    public void setGravitationalPotens(double gravitationalPotens) {
+        this.gravitationalPotens = gravitationalPotens;
+    }
+
+    public double getGravitationFactor() {
+        return gravitationFactor;
+    }
+
+    public void setGravitationFactor(double gravitationFactor) {
+        this.gravitationFactor = gravitationFactor;
+    }
+    
     public GravityPart(double gravitationalPullDistance)
     {
         this.gravitationalPullDistance = gravitationalPullDistance;
@@ -48,7 +67,6 @@ public class GravityPart implements EntityPart {
     public void setGravitationalPullDistance(double gravitationalPullDistance) {
         this.gravitationalPullDistance = gravitationalPullDistance;
     }
-    
     
     
     

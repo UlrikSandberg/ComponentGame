@@ -41,17 +41,32 @@ public class CollisionDetector implements IPostEntityProcessingService {
             {
                 continue;
             }
+            
             for (Entity f : world.getEntities()) {
                 if (e.getID().equals(f.getID()) || f.getPart(NonCollidable.class) != null) {
                     continue;
                 }
                 
                 //*********** SECTION - BULLET NOT COLLODING WITH THE ENTITY THAT SPAWNED THEM
-                
                 if (Collision(e, f, false)) {
                     
                     //Collision was detected...
                     collidingParties = DetermineCollidingParties(e, f);
+                    
+                    if(collidingParties.equals(collidingParties.BulletAndBullet))
+                    {
+                        continue;
+                    }
+                    
+                    if(collidingParties.equals(collidingParties.EnemyAndBullet))
+                    {
+                        world.removeEntity(f);
+                    }
+                    
+                    if(collidingParties.equals(collidingParties.BulletAndEnemy))
+                    {
+                        world.removeEntity(e); 
+                    }
                     
                     //Remove player if collision is between enemy and player
                     if(collidingParties.equals(CollidingParties.EnemyAndPlayer))
@@ -181,24 +196,40 @@ public class CollisionDetector implements IPostEntityProcessingService {
                             continue;
                         }
                     }
-
-                    world.removeEntity(f);
+                    
+                    if(e.getPart(powerupPart.class) != null)
+                    {
+                        world.removeEntity(e);
+                    }
+                    
+                    if(f.getPart(powerupPart.class) != null)
+                    {
+                        world.removeEntity(f);
+                    }
+                    
+                    LifePart elp = e.getPart(LifePart.class);
+                    LifePart flp = f.getPart(LifePart.class);
+                    
+                    elp.setIsHit(true);
+                    flp.setIsHit(true); 
                 }
                 
                 //********** SECTION - END : ASTEROID COLLISION DETECTION
                 
                 LifePart lpe = e.getPart(LifePart.class);
+                
                 if(lpe != null)
                 {
-                    if (lpe.isDead()) {
+                    if (lpe.getLife() < 1) {
                         world.removeEntity(e);
                     }
                 }
 
                 LifePart lpf = f.getPart(LifePart.class);
+                
                 if(lpf != null)
                 {
-                    if (lpf.isDead()) {
+                    if (lpf.getLife() < 1) {
                         world.removeEntity(f);
                     }
                 }
@@ -272,11 +303,11 @@ public class CollisionDetector implements IPostEntityProcessingService {
         else
         {
             //Foreach of rectangle f points, check if they are inside rectangle e's x and y range
-            double xStart = ep.getX();
-            double xEnd = ep.getX() + eWidth - 10;
+            double xStart = ep.getX() + (eWidth / 5);
+            double xEnd = ep.getX() + eWidth - (eWidth / 5);
             
-            double yStart = ep.getY();
-            double yEnd = ep.getY() + eHeight - 10;
+            double yStart = ep.getY() + (eHeight / 5);
+            double yEnd = ep.getY() + eHeight - (eHeight / 5);
             
             BoxCollision box = new BoxCollision(new Coordinates(fp.getX(), fp.getY()), new Coordinates(fp.getX() + fWidth, fp.getY()), new Coordinates(fp.getX(), fp.getY() + fHeight), new Coordinates(fp.getX() + fWidth, fp.getY() + fHeight));
             

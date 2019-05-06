@@ -25,6 +25,7 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
+import dk.sdu.mmmi.cbse.core.main.Screens.EndScreen;
 import dk.sdu.mmmi.cbse.core.main.Screens.MenuScreen;
 import dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver;
 import dk.sdu.mmmi.cbse.core.managers.CameraManager;
@@ -76,7 +77,6 @@ public class GameEngine implements Screen{
         
         batch = new SpriteBatch();
         
-        
         cam.update();
 
         sr = new ShapeRenderer();
@@ -115,7 +115,7 @@ public class GameEngine implements Screen{
         
         if(gameData.isGameOver())
         {
-            gameInit.setScreen(new MenuScreen(gameInit)); 
+            gameInit.setScreen(new EndScreen(gameInit, 1000.0));
         }
         
         // clear screen to black
