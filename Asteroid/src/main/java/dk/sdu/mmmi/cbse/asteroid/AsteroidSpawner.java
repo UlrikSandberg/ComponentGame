@@ -60,7 +60,6 @@ public class AsteroidSpawner extends TimerTask {
         
         if(numberOfEntities > 20)
         {
-            System.out.println("To many entities to spawn");
             return;
         }
         
@@ -77,7 +76,6 @@ public class AsteroidSpawner extends TimerTask {
             jarUrl = new File("").getAbsolutePath() + "/Asteroid/target/Asteroid-1.0-SNAPSHOT.jar!/assets/images/comet.png";
             asteroid.setSprite(jarUrl);
             world.addEntity(asteroid);
-            System.out.println("Spawning");
         }
     }
     

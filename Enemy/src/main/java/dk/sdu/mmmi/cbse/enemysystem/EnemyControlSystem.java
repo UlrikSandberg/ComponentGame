@@ -60,7 +60,6 @@ public class EnemyControlSystem implements IEntityProcessingService {
                 movingPart.setRight(false);
                 movingPart.setLeft(false);
                 movingPart.setUp(false);
-                shootingPart.setIsShooting(false);
                 
         }
     }

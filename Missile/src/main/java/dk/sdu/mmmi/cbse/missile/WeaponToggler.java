@@ -24,7 +24,7 @@ public class WeaponToggler implements IWeaponInterface {
     
     @Override
     public void dertimeWeaponState(GameData gameData) {
-         if(gameData.getSelectedWeapon() == 2)
+        if(gameData.getSelectedWeapon() == 2)
         {
             gameData.setSelectedWeaponImage(weaponimage);
         }

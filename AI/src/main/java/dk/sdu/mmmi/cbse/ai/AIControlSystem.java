@@ -66,8 +66,8 @@ public class AIControlSystem implements IEntityProcessingService{
                     if((Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)) < 300) &&
                             (Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)) < 300)){
                         shoot(posPart, finalNode, entity);
-                        System.out.println("RangeX: " + Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)));
-                        System.out.println("RangeY: " + Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)));
+                        //System.out.println("RangeX: " + Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)));
+                        //System.out.println("RangeY: " + Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)));
                     } 
                     
                     if(!path.isEmpty()){
@@ -93,7 +93,7 @@ public class AIControlSystem implements IEntityProcessingService{
         ShootingPart shootingPart = aiControlled.getPart(ShootingPart.class);
         
         if(shootingPart != null){
-        shootingPart.setIsShooting(true);
+            shootingPart.setIsShooting(true);
         } 
     }
     

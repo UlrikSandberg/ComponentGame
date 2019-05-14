@@ -138,6 +138,8 @@ public class GameEngine implements Screen{
         draw();
         drawToggleWeapon();
         
+        batch.end();
+        //***** MARK SECTION START *****
         for (Entity e : world.getEntities()){
             if (e.getPart(ScorePart.class) != null){
                 ScorePart sp = e.getPart(ScorePart.class);
@@ -147,8 +149,7 @@ public class GameEngine implements Screen{
                 gameInit.batch.end();
             }
         }
-        batch.end();
-        
+        //***** MARK SECTION END *****
     }
 
     private void drawToggleWeapon()
@@ -164,11 +165,12 @@ public class GameEngine implements Screen{
             Sprite sprite = new Sprite(assetManager.get(gameData.getSelectedWeaponImage(), Texture.class));
             sprite.setSize(100, 100); 
             sprite.setOriginCenter();
+            sprite.setY(cam.position.y);
+            sprite.setX(cam.position.x);
             sprite.setY(cam.position.y - 400);
             sprite.setX(cam.position.x - 100 + 500);
             
             sprite.draw(batch);
-            
         } 
     }
     
@@ -223,8 +225,6 @@ public class GameEngine implements Screen{
                         }
                     }
                 }
-                
-                
         
                 sprite.flip(false, false);
                 sprite.rotate90(true);

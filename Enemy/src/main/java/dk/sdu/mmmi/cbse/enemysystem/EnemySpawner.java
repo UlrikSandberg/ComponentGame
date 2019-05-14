@@ -49,9 +49,8 @@ public class EnemySpawner extends TimerTask {
             numberOfEnemies++;
         }
         
-        if(numberOfEnemies > 5)
+        if(numberOfEnemies > 3)
         {
-            System.out.println("Can't spawn more enemies at the moment");
             return;
         }
         
@@ -64,7 +63,6 @@ public class EnemySpawner extends TimerTask {
         for(int i = 0; i<value; i++){
             enemy = createEnemyShip(gameData);
             world.addEntity(enemy);
-            System.out.println("Spawing enemy");
         }
     }
     

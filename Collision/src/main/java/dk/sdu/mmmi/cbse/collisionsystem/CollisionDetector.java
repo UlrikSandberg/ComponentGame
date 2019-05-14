@@ -60,12 +60,14 @@ public class CollisionDetector implements IPostEntityProcessingService {
                     
                     if(collidingParties.equals(collidingParties.EnemyAndBullet))
                     {
-                        world.removeEntity(f);
+                        continue;
+                        //world.removeEntity(f);
                     }
                     
                     if(collidingParties.equals(collidingParties.BulletAndEnemy))
                     {
-                        world.removeEntity(e); 
+                        continue;
+                        //world.removeEntity(e); 
                     }
                     
                     //Remove player if collision is between enemy and player

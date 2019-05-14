@@ -27,7 +27,7 @@ public class WeaponToggler implements IWeaponInterface {
     public void dertimeWeaponState(GameData gameData) {
         
         if(gameData.getSelectedWeapon() == 1)
-        {
+        {   
             gameData.setSelectedWeaponImage(toggleWeaponString);
         }
     }
