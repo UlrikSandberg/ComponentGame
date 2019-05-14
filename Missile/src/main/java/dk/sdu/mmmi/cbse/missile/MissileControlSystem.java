@@ -28,12 +28,12 @@ import org.openide.util.lookup.ServiceProviders;
  * @author magnusm
  */
 @ServiceProviders(value = {
-    @ServiceProvider(service = IEntityProcessingService.class),})
-public class MissileControlSystem implements IEntityProcessingService, IWeaponInterface {
+    @ServiceProvider(service = IEntityProcessingService.class), })
+public class MissileControlSystem implements IEntityProcessingService {
     
     private Entity missile;
     
-    //private String imageurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
+    private String imageurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/missile.png";
     private String soundurl = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/MissileSound.mp3";
     private String weaponimage = new File("").getAbsolutePath() + "/Missile/target/Missile-1.0-SNAPSHOT.jar!/images/assets/MissileTurret.jpg";
     
@@ -42,6 +42,8 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
 
     @Override
     public void process(GameData gameData, World world) {
+        
+            
          for (Entity entity : world.getEntities()) {
             if (entity.getPart(ShootingPart.class) != null) {
                             
@@ -93,7 +95,7 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
         // Projectile Part only used for better collision detection     
         m.add(new ProjectilePart(uuid.toString()));
         m.setRadius(2);
-        //m.setSprite(imageurl);
+        m.setSprite(imageurl);
         m.setSpawnSound(soundurl); 
         
         float[] colour = new float[4];
@@ -106,13 +108,5 @@ public class MissileControlSystem implements IEntityProcessingService, IWeaponIn
 
         return m;
     }
-
-    @Override
-    public void dertimeWeaponState(GameData gameData) {
-         if(gameData.getSelectedWeapon() == 2)
-        {
-            gameData.setSelectedWeaponImage(weaponimage);
-        }
-    }
-    }
+}
 

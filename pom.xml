@@ -85,6 +85,7 @@
         <module>GravityModule</module>
         <module>CommonProjectile</module>
         <module>CommonPlayer</module>
+        <module>Score</module>
     </modules>
 
     <properties>

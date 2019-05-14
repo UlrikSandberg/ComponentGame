@@ -1,29 +1,23 @@
 package dk.sdu.mmmi.cbse.core.main;
 
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.NonEntity;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ScorePart;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SizePart;
@@ -31,20 +25,16 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IWeaponInterface;
+import dk.sdu.mmmi.cbse.core.main.Screens.EndScreen;
 import dk.sdu.mmmi.cbse.core.main.Screens.MenuScreen;
 import dk.sdu.mmmi.cbse.core.managers.AssetsJarFileResolver;
 import dk.sdu.mmmi.cbse.core.managers.CameraManager;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javafx.geometry.Pos;
-import org.lwjgl.opengl.XRandR;
-import org.lwjgl.util.vector.Matrix;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
@@ -72,7 +62,7 @@ public class GameEngine implements Screen{
     private static final int GAME_HEIGHT = 5000;
     private static final int GAME_WIDTH = 8000;
 
-    public GameEngine(GameInitializer gmaeInit)
+    public GameEngine(GameInitializer gameInit)
     {
         this.gameInit = gameInit;
         
@@ -86,7 +76,6 @@ public class GameEngine implements Screen{
         cameraManager = new CameraManager();
         
         batch = new SpriteBatch();
-        
         
         cam.update();
 
@@ -126,7 +115,7 @@ public class GameEngine implements Screen{
         
         if(gameData.isGameOver())
         {
-            gameInit.setScreen(new MenuScreen(gameInit)); 
+            gameInit.setScreen(new EndScreen(gameInit, gameData.getPlayerScore()));
         }
         
         // clear screen to black
@@ -148,7 +137,19 @@ public class GameEngine implements Screen{
         DrawNonEntities();
         draw();
         drawToggleWeapon();
+        
         batch.end();
+        //***** MARK SECTION START *****
+        for (Entity e : world.getEntities()){
+            if (e.getPart(ScorePart.class) != null){
+                ScorePart sp = e.getPart(ScorePart.class);
+                gameInit.batch.begin();
+                gameInit.font.setScale(1.5f);
+                gameInit.font.draw(gameInit.batch, "Score: " + sp.getPoints(), 10, 780);
+                gameInit.batch.end();
+            }
+        }
+        //***** MARK SECTION END *****
     }
 
     private void drawToggleWeapon()
@@ -164,11 +165,12 @@ public class GameEngine implements Screen{
             Sprite sprite = new Sprite(assetManager.get(gameData.getSelectedWeaponImage(), Texture.class));
             sprite.setSize(100, 100); 
             sprite.setOriginCenter();
+            sprite.setY(cam.position.y);
+            sprite.setX(cam.position.x);
             sprite.setY(cam.position.y - 400);
             sprite.setX(cam.position.x - 100 + 500);
             
             sprite.draw(batch);
-            
         } 
     }
     
@@ -223,8 +225,6 @@ public class GameEngine implements Screen{
                         }
                     }
                 }
-                
-                
         
                 sprite.flip(false, false);
                 sprite.rotate90(true);
@@ -293,6 +293,20 @@ public class GameEngine implements Screen{
                 entity.setIsLoaded(true);
             }
         }
+    }
+    
+    private void drawScore(SpriteBatch batch){
+        
+        for (Entity e : world.getEntities()){
+            if (e.getPart(ScorePart.class) != null){
+                ScorePart sp = e.getPart(ScorePart.class);
+                gameInit.font.setScale(1.5f);
+                gameInit.font.draw(batch, "Score:" + sp.getPoints(), 400, 600);
+            }
+        }
+        
+        
+        
     }
     
      

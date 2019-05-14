@@ -49,9 +49,8 @@ public class EnemySpawner extends TimerTask {
             numberOfEnemies++;
         }
         
-        if(numberOfEnemies > 5)
+        if(numberOfEnemies > 3)
         {
-            System.out.println("Can't spawn more enemies at the moment");
             return;
         }
         
@@ -64,7 +63,6 @@ public class EnemySpawner extends TimerTask {
         for(int i = 0; i<value; i++){
             enemy = createEnemyShip(gameData);
             world.addEntity(enemy);
-            System.out.println("Spawing enemy");
         }
     }
     
@@ -89,7 +87,7 @@ public class EnemySpawner extends TimerTask {
         enemyShip.setColour(colour);
         enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyShip.add(new PositionPart(x, y, radians));
-        enemyShip.add(new LifePart(1));
+        enemyShip.add(new LifePart(3));
         enemyShip.add(new ControlPart(true));
         enemyShip.add(new ShootingPart("fromEnemy"));
         enemyShip.setSprite(new File("").getAbsolutePath() + "/Enemy/target/Enemy-1.0-SNAPSHOT.jar!/assets/images/ufoAbove.png");

@@ -50,14 +50,16 @@ public class EnemyControlSystem implements IEntityProcessingService {
                 movingPart.process(gameData, enemy);
                 positionPart.process(gameData, enemy);
                 lifePart.process(gameData, enemy);
-                shootingPart.process(gameData, enemy);
+                if(shootingPart != null)
+                {
+                    shootingPart.process(gameData, enemy);
+                }
 
                 updateShape(enemy);
 
                 movingPart.setRight(false);
                 movingPart.setLeft(false);
                 movingPart.setUp(false);
-                shootingPart.setIsShooting(false);
                 
         }
     }

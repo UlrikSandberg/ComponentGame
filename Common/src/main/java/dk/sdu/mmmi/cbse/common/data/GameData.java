@@ -19,7 +19,16 @@ public class GameData {
     private String selectedWeaponImage;
     private int selectedWeapon = 1;
     private boolean gameOver = false;
+    private float playerScore;
 
+    public float getPlayerScore() {
+        return playerScore;
+    }
+
+    public void setPlayerScore(float playerScore) {
+        this.playerScore = playerScore;
+    }
+    
     public boolean isGameOver() {
         return gameOver;
     }
