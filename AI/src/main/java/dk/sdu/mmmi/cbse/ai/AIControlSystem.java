@@ -65,12 +65,13 @@ public class AIControlSystem implements IEntityProcessingService{
                     
                     if((Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)) < 300) &&
                             (Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)) < 300)){
-                        shoot(posPart, finalNode, entity);
-                        System.out.println("RangeX: " + Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)));
-                        System.out.println("RangeY: " + Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)));
-                    } 
+                        shoot(posPart, finalNode, entity, gameData);
+                    }
                     
-                    if(!path.isEmpty()){
+                    if((Math.abs(posPart.getX() - gameData.getPlayerPositionX()) < 100) &&
+                            (Math.abs(posPart.getY() - gameData.getPlayerPositionY()) < 100)){
+                        finalChase(entity, gameData);
+                    }else if(!path.isEmpty()){
                         if(path.size() > 1){
                             
                         
@@ -84,17 +85,34 @@ public class AIControlSystem implements IEntityProcessingService{
         }
     }
     
-    public void shoot(PositionPart initialNodePos, Node finalNode, Entity aiControlled){
+    public void finalChase(Entity aiControlled, GameData gameData){
+        PositionPart aiPos = aiControlled.getPart(PositionPart.class);
+        
+        float aiX = aiPos.getX();
+        float aiY = aiPos.getY();
+        
+        if(aiX < gameData.getPlayerPositionX()) aiPos.setX(aiX + 3);
+        if(aiX > gameData.getPlayerPositionX()) aiPos.setX(aiX - 3);
+        if(aiY < gameData.getPlayerPositionY()) aiPos.setY(aiY + 3);
+        if(aiY > gameData.getPlayerPositionY()) aiPos.setY(aiY - 3);
+    }
+    
+    public void shoot(PositionPart initialNodePos, Node finalNode, Entity aiControlled, 
+            GameData gameData){
         float angle = (float) Math.atan2(Math.abs(finalNode.getY() - initialNodePos.getY()), 
                 Math.abs(finalNode.getX() - initialNodePos.getX())); 
         
-        initialNodePos.setRadians(angle);
+        System.out.println(angle * 10);
+        
+        initialNodePos.setRadians(angle * 10);
+        initialNodePos.process(gameData, aiControlled);
         
         ShootingPart shootingPart = aiControlled.getPart(ShootingPart.class);
         
         if(shootingPart != null){
         shootingPart.setIsShooting(true);
-        } 
+        shootingPart.process(gameData, aiControlled);
+        }
     }
     
     public void move(PositionPart pos, Node nextStep){
@@ -104,15 +122,11 @@ public class AIControlSystem implements IEntityProcessingService{
         int gx = nextStep.getX();
         int gy = nextStep.getY();
         
-        
-        
         if(px < gx) pos.setX(pos.getX() + 3);
         if(px > gx) pos.setX(pos.getX() - 3);
         if(py < gy) pos.setY(pos.getY() + 3);
         if(py > gy) pos.setY(pos.getY() - 3);
         
-        
-
         float y = nextStep.getY() - pos.getY();
         float x = nextStep.getX() - pos.getX();
         float angleInDegrees = (float)Math.atan2(y, x);
