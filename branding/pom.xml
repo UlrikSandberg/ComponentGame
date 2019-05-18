@@ -8,10 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>AsteroidsNetbeansModules-branding</artifactId>
+    <artifactId>SpaceEndgame-branding</artifactId>
     <packaging>nbm</packaging>
 
-    <name>AsteroidsNetbeansModules-branding</name>
+    <name>SpaceEndgame-branding</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
