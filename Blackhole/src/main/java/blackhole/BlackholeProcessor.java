@@ -81,11 +81,11 @@ public class BlackholeProcessor implements IEntityProcessingService {
                     {
                         world.removeEntity(e);
                         //Increase size of blackhole
-                        holeS.setWidth(holeS.getWidth()+10);
-                        holeS.setHeight(holeS.getHeight()+10);
-                        gPart.setGravitationalPullDistance(gPart.getGravitationalPullDistance() + 10);
-                        gPart.setGravitationFactor(gPart.getGravitationFactor()+5);
-                        gPart.setGravitationalPotens(gPart.getGravitationalPotens() + 0.01);
+                        holeS.setWidth(holeS.getWidth()+2);
+                        holeS.setHeight(holeS.getHeight()+2);
+                        gPart.setGravitationalPullDistance(gPart.getGravitationalPullDistance() + 2);
+                        gPart.setGravitationFactor(gPart.getGravitationFactor()+1);
+                        gPart.setGravitationalPotens(gPart.getGravitationalPotens() + 0.002);
                         
                     }
                 }

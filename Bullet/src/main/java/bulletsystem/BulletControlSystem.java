@@ -140,7 +140,7 @@ public class BulletControlSystem implements IEntityProcessingService {
         Entity b = new Projectile();
         
         b.add(new PositionPart((float)x, (float)y, (float)getRadians(enemy, player)));
-        b.add(new MovingPart(0, 2000, 200, 0));
+        b.add(new MovingPart(0, 4000, 400, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
         b.add(new ProjectilePart(id.toString()));
