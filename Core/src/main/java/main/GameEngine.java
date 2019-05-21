@@ -83,8 +83,8 @@ public class GameEngine implements Screen{
         float x = gameData.getPlayerPositionX();
         float y = gameData.getPlayerPositionY();
         
-       AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
-       assetManager = new AssetManager(jfhr);
+      // AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
+       assetManager = gameInit._assetManager;
         
         batch.begin();
         //sprite.setCenter(gameData.getPlayerPositionX(), gameData.getPlayerPositionY());
