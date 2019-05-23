@@ -49,7 +49,7 @@ public class EnemySpawner extends TimerTask {
             numberOfEnemies++;
         }
         
-        if(numberOfEnemies > 3)
+        if(numberOfEnemies > 1)
         {
             return;
         }

@@ -13,6 +13,7 @@ import entityparts.ControlPart;
 import entityparts.MovingPart;
 import entityparts.PositionPart;
 import entityparts.ShootingPart;
+import entityparts.SizePart;
 import services.IEntityProcessingService;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,8 +30,9 @@ import org.openide.util.lookup.ServiceProviders;
     @ServiceProvider(service = IEntityProcessingService.class),})
 public class AIControlSystem implements IEntityProcessingService{
     
-    private static int GAME_WIDT = 4300;
-    private static int GAME_HEIGHT = 2850;
+    private static int GAME_WIDT = 8000;
+    private static int GAME_HEIGHT = 5000;
+    int i = 1;
     
     @Override
     public void process(GameData gameData, World world){
@@ -53,6 +55,21 @@ public class AIControlSystem implements IEntityProcessingService{
                                (blockPosPart.getX() != gameData.getPlayerPositionX() && blockPosPart.getY() != gameData.getPlayerPositionY()) &&
                                (blockPosPart.getX() < gameData.getDisplayWidth() && blockPosPart.getY() < gameData.getDisplayHeight())
                                     ){
+                                    if(block.getPart(SizePart.class) != null){
+                                        SizePart sizePart = block.getPart(SizePart.class);
+                                        float x = blockPosPart.getX();
+                                        float y = blockPosPart.getY();
+                                        float adjustedXMinus = x - (sizePart.getWidth() / 2);
+                                        float adjustedYMinus = y - (sizePart.getHeight() / 2);
+                                        float adjustedYPlus = y + (sizePart.getHeight() / 2);
+                                        float adjustedXPlus = x + (sizePart.getWidth() / 2);
+                                        
+                                        while(adjustedXMinus < x && adjustedYMinus < y){
+                                            //blocks.add(new Node((int)x - ))
+                                            break;
+                                        }
+                                    }
+                                    
                                     blocks.add(new Node((int)blockPosPart.getX(), (int)blockPosPart.getY()));
                             }
                         }
@@ -62,11 +79,12 @@ public class AIControlSystem implements IEntityProcessingService{
                     Node initialNode = new Node((int)posPart.getX(), (int)posPart.getY());
                     
                     AStar aStar = new AStar(GAME_WIDT, GAME_HEIGHT, initialNode, finalNode);
-                    aStar.setBlocks(blocks);
+                    aStar.setBlocks(world.getEntities(), gameData);
                     List<Node> path = aStar.findPath();
                     
-                    if((Math.abs((initialNode.getX() * 40) - (finalNode.getX() * 40)) < 300) &&
-                            (Math.abs((initialNode.getY() * 40) - (finalNode.getY() * 40)) < 300)){
+                    
+                    if((Math.abs((initialNode.getX()) - (finalNode.getX() * 40)) < 300) &&
+                            (Math.abs((initialNode.getY()) - (finalNode.getY() * 40)) < 300)){
                         shoot(posPart, finalNode, entity, gameData);
                     }
                     

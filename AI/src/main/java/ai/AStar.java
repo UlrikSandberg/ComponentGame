@@ -2,6 +2,11 @@ package ai;
 
 import PriorityQueue.PQHeap;
 import ai.Node;
+import commonprojectile.Projectile;
+import data.Entity;
+import data.GameData;
+import entityparts.PositionPart;
+import entityparts.SizePart;
 import java.util.*;
 
 public class AStar {
@@ -48,9 +53,9 @@ public class AStar {
         }
     }
 
-    public void setBlocks(Collection<Node> blocks){
+    public void setBlocks(Collection<Entity> entities, GameData gameData){
 
-        for(Node block : blocks){
+        /*for(Node block : blocks){
             for(int i = 0; i < searchArea.length; i++){
                 for(int j = 0; j < searchArea[i].length; j++){
                     if(searchArea[i][j].getY() == block.getY() / this.entitySize &&
@@ -59,7 +64,31 @@ public class AStar {
                     }
                 }
             }
-        }
+        }*/
+        
+        for(Entity entity : entities){
+            if(entity.getPart(PositionPart.class) != null && !(entity instanceof Projectile)){
+                PositionPart posPart = entity.getPart(PositionPart.class);
+                if(posPart.getX() != gameData.getPlayerPositionX() && posPart.getY() != gameData.getPlayerPositionY()){
+                    SizePart sizePart = new SizePart(40, 40);
+                    if(entity.getPart(SizePart.class) != null){
+                        sizePart = entity.getPart(SizePart.class);
+                    }
+                    for(int i = 0; i < searchArea.length; i++){
+                        for(int j = 0; j < searchArea[i].length; j++){
+                            
+                            if((    searchArea[i][j].getX() >= posPart.getX() / 40 &&
+                                    searchArea[i][j].getY() >= posPart.getY() / 40) &&
+                                    searchArea[i][j].getX() <= (posPart.getX() + sizePart.getWidth()) / 40 &&
+                                    searchArea[i][j].getY() <= (posPart.getY() + sizePart.getHeight()) / 40){
+                                searchArea[i][j].setBlock(true);
+                            }
+                        }
+                    }
+                }
+                }
+            }
+        
     }
 
 
@@ -87,6 +116,7 @@ public class AStar {
         }
 
         for(Node node : path){
+            
             node.setY(node.getY() * this.entitySize);
             node.setX(node.getX() * this.entitySize);
         }

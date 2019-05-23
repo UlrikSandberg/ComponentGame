@@ -47,7 +47,7 @@ public class GravityProcessor implements IEntityProcessingService {
                 for (Entity f : world.getEntities()) {
                     
                     if(f.getPart(GravityPart.class) != null || f.getPart(NonCollidable.class) != null ||
-                            !(f instanceof Enemy))
+                            f instanceof Enemy)
                     {
                         continue;
                     }
