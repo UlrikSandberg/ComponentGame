@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.sdu.mmmi.cbse.ai;
+package ai;
 
+import PriorityQueue.PQHeap;
+import ai.Node;
 import java.util.ArrayList;
 import java.util.Collection;
 import junit.framework.Assert;

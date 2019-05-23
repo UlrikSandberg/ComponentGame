@@ -7,9 +7,9 @@ package background;
 
 import data.GameData;
 import data.World;
-import services.IGamePluginService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
+import services.IGamePluginService;
 
 /**
  *
