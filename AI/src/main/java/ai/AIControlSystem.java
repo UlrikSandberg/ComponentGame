@@ -5,6 +5,7 @@
  */
 package ai;
 
+import commonprojectile.Projectile;
 import data.Entity;
 import data.GameData;
 import data.World;
@@ -41,6 +42,7 @@ public class AIControlSystem implements IEntityProcessingService{
         for(Entity entity : world.getEntities()){
             if(entity.getPart(ControlPart.class) != null){
                 if(entity.getPart(PositionPart.class) != null){
+                    if(!(entity instanceof Projectile)){
                     PositionPart posPart = entity.getPart(PositionPart.class);
                     
                     for(Entity block : world.getEntities()){
@@ -80,6 +82,7 @@ public class AIControlSystem implements IEntityProcessingService{
                     }else{
                         move(posPart, new Node((int)gameData.getPlayerPositionX(), (int)gameData.getPlayerPositionY()));
                     }
+                }
                 }
             }
         }

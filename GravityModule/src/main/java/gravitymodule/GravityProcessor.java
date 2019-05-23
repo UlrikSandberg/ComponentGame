@@ -8,6 +8,7 @@ package gravitymodule;
 import data.Entity;
 import data.GameData;
 import data.World;
+import enemy.Enemy;
 import entityparts.GravityPart;
 import entityparts.MovingPart;
 import entityparts.NonCollidable;
@@ -45,7 +46,8 @@ public class GravityProcessor implements IEntityProcessingService {
                 //Check for all entities, if they are within a certain radius pull them towards and if they hit the blackhole they die!
                 for (Entity f : world.getEntities()) {
                     
-                    if(f.getPart(GravityPart.class) != null || f.getPart(NonCollidable.class) != null)
+                    if(f.getPart(GravityPart.class) != null || f.getPart(NonCollidable.class) != null ||
+                            !(f instanceof Enemy))
                     {
                         continue;
                     }
