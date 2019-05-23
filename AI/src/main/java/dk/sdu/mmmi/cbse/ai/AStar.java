@@ -10,7 +10,8 @@ public class AStar {
     private int entitySize;
     private int hvCost, diagonalCost;
     private Node[][] searchArea;
-    private PriorityQueue<Node> openList;
+   // private PriorityQueue<Node> openList;
+    private PQHeap openList;
     private Set<Node> closedSet;
     private Node initialNode, finalNode;
 
@@ -21,12 +22,13 @@ public class AStar {
         this.setInitialNode(initialNode);
         this.setFinalNode(finalNode);
         this.searchArea = new Node[(x - 40)/this.entitySize][(y - 40)/this.entitySize];
-        this.openList = new PriorityQueue<Node>(new Comparator<Node>() {
+        /*this.openList = new PriorityQueue<Node>(new Comparator<Node>() {
             @Override
             public int compare(Node node0, Node node1) {
                 return Integer.compare(node0.getFinalCost(), node1.getFinalCost());
             }
-        });
+        });*/
+        this.openList = new PQHeap(1000);
         this.setNodes();
         this.closedSet = new HashSet<>();
     }
@@ -61,9 +63,9 @@ public class AStar {
 
 
     public List<Node> findPath(){
-        this.openList.add(this.initialNode);
-        while(!isEmpty(this.openList)){
-            Node currentNode = openList.poll();
+        this.openList.insert(this.initialNode);
+        while(!this.openList.isEmpty()){
+            Node currentNode = openList.extractMin();
             this.closedSet.add(currentNode);
             if(isFinalNode(currentNode)){
                 return this.getPath(currentNode);
@@ -140,14 +142,14 @@ public class AStar {
             if (!adjacentNode.isBlock() && !getClosedSet().contains(adjacentNode)) {
                 if (!getOpenList().contains(adjacentNode)) {
                     adjacentNode.setNodeData(currentNode, cost);
-                    getOpenList().add(adjacentNode);
+                    getOpenList().insert(adjacentNode);
                 } else {
                     boolean changed = adjacentNode.checkBetterPath(currentNode, cost);
                     if (changed) {
                         // Remove and Add the changed node, so that the PriorityQueue can sort again its
                         // contents with the modified "finalCost" value of the modified node
                         getOpenList().remove(adjacentNode);
-                        getOpenList().add(adjacentNode);
+                        getOpenList().insert(adjacentNode);
                     }
                 }
             }
@@ -162,7 +164,7 @@ public class AStar {
 
     private boolean isFinalNode(Node currentNode){return currentNode.equals(finalNode); }
 
-    private boolean isEmpty(PriorityQueue<Node> openList) {return openList.size() == 0;}
+    private boolean isEmpty(PQHeap openList) {return openList.getHeapSize() == 0;}
 
     public Node[][] getSearchArea() {
         return searchArea;
@@ -172,11 +174,11 @@ public class AStar {
         this.searchArea = searchArea;
     }
 
-    public PriorityQueue<Node> getOpenList() {
+    public PQHeap getOpenList() {
         return openList;
     }
 
-    public void setOpenList(PriorityQueue<Node> openList) {
+    public void setOpenList(PQHeap openList) {
         this.openList = openList;
     }
 
