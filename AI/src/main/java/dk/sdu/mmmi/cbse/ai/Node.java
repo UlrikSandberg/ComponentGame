@@ -65,7 +65,7 @@ public class Node {
         return finalCost;
     }
 
-    public void setFinalCost(int finalCost) {
+    private void setFinalCost(int finalCost) {
         this.finalCost = finalCost;
     }
 
