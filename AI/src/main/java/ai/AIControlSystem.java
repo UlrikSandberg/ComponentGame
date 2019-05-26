@@ -47,34 +47,6 @@ public class AIControlSystem implements IEntityProcessingService{
                     if(!(entity instanceof Projectile)){
                     PositionPart posPart = entity.getPart(PositionPart.class);
                     
-                    for(Entity block : world.getEntities()){
-                        if(entity.getPart(PositionPart.class) != null){
-                            PositionPart blockPosPart = block.getPart(PositionPart.class);
-                            if(
-                               (blockPosPart.getX() != posPart.getX() && blockPosPart.getY() != posPart.getY()) &&
-                               (blockPosPart.getX() != gameData.getPlayerPositionX() && blockPosPart.getY() != gameData.getPlayerPositionY()) &&
-                               (blockPosPart.getX() < gameData.getDisplayWidth() && blockPosPart.getY() < gameData.getDisplayHeight())
-                                    ){
-                                    if(block.getPart(SizePart.class) != null){
-                                        SizePart sizePart = block.getPart(SizePart.class);
-                                        float x = blockPosPart.getX();
-                                        float y = blockPosPart.getY();
-                                        float adjustedXMinus = x - (sizePart.getWidth() / 2);
-                                        float adjustedYMinus = y - (sizePart.getHeight() / 2);
-                                        float adjustedYPlus = y + (sizePart.getHeight() / 2);
-                                        float adjustedXPlus = x + (sizePart.getWidth() / 2);
-                                        
-                                        while(adjustedXMinus < x && adjustedYMinus < y){
-                                            //blocks.add(new Node((int)x - ))
-                                            break;
-                                        }
-                                    }
-                                    
-                                    blocks.add(new Node((int)blockPosPart.getX(), (int)blockPosPart.getY()));
-                            }
-                        }
-                    }
-                    
                     //System.out.println("X: " + posPart.getX() + ", Y: " + posPart.getY());
                     Node initialNode = new Node((int)posPart.getX(), (int)posPart.getY());
                     
@@ -123,7 +95,6 @@ public class AIControlSystem implements IEntityProcessingService{
         float angle = (float) Math.atan2(Math.abs(finalNode.getY() - initialNodePos.getY()), 
                 Math.abs(finalNode.getX() - initialNodePos.getX())); 
         
-        System.out.println(angle * 10);
         
         initialNodePos.setRadians(angle * 10);
         initialNodePos.process(gameData, aiControlled);

@@ -33,12 +33,12 @@ public class powerupPlugin implements IGamePluginService {
     
     @Override
     public void start(GameData gameData, World world) {
-        world.addEntity(CreatePowerup(imageUrl));
+        //world.addEntity(CreatePowerup(imageUrl));
     }
 
     @Override
     public void stop(GameData gameData, World world) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
